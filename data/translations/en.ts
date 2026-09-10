@@ -6,5 +6,6 @@ export const en = {
   choose: 'What would you say next?', chooseHint: 'Every response opens a different conversation.',
   end: 'A conversation has begun.', endHint: 'This opening ends here. The next chapter will explore the belief together.',
   another: 'Try another response', footer: 'Respect the person. Question the belief. Verify the fact.',
-  context: 'Late afternoon · Dadi’s kitchen', stage: ['Listen', 'Wonder', 'Respond', 'Reflect'],
+  context: 'Late afternoon · Dadi’s kitchen', stage: ['Listen', 'Question', 'Reflect', 'Evidence', 'Understand'],
 };
+

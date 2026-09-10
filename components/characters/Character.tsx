@@ -1,9 +1,11 @@
 'use client';
+import { useLanguage } from '@/lib/useLanguage';
 import { useEffect, useState } from 'react';
 import type { Animation, CharacterId, Expression } from '@/lib/story/types';
 import { CharacterExpression } from './CharacterExpression';
 export interface CharacterProps { character: CharacterId; expression?: Expression; animation?: Animation; className?: string; }
 export function Character({ character, expression = 'idle', animation = 'idle', className = '' }: CharacterProps) {
+  const { t } = useLanguage();
   const [blinking, setBlinking] = useState(false);
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>; let closed = false;
@@ -13,7 +15,7 @@ export function Character({ character, expression = 'idle', animation = 'idle', 
   }, []);
   const dadi = character === 'dadi', aara = character === 'aara';
   const skin = dadi ? '#c68d66' : aara ? '#dba075' : '#cb9068';
-  return <svg viewBox="0 0 250 410" role="img" aria-label={`${character}, ${expression}${animation === 'talking' ? ', speaking' : ''}`} className={`character character-${character} anim-${animation} mood-${expression} ${className}`}>
+  return <svg viewBox="0 0 250 410" role="img" aria-label={`${character}, ${t(expression)}${animation === 'talking' ? `, ${t('speaking')}` : ''}`} className={`character character-${character} anim-${animation} mood-${expression} ${className}`}>
     <ellipse cx="126" cy="395" rx="65" ry="9" fill="#694e3b" opacity=".13"/>
     <g className="character-body">
       {!dadi && <g><path d="M92 285 L90 370 Q100 380 113 371 L124 302 L135 371 Q147 380 158 371 L155 283" fill={aara ? '#ead7b1' : '#485d68'}/><path d="M89 366 L86 389 Q101 397 118 389 L114 368 M136 368 L133 389 Q152 397 168 389 L158 368" fill={aara ? '#a24e39' : '#e9c595'} stroke="#574037" strokeWidth="2"/></g>}

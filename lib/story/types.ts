@@ -5,5 +5,10 @@ export type Animation = 'idle' | 'talking' | 'enter' | 'exit' | 'bounce' | 'reac
 export type Skill = 'gyaan' | 'samvaad' | 'saath' | 'badlav';
 export interface Dialogue { id: string; speaker: CharacterId | 'companion'; text: string; translation: string; expression: Expression; listener: Expression; }
 export interface Choice { id: string; text: string; translation: string; nextScene: string; skillImpact: Partial<Record<Skill, number>>; consequence: string; companionExpression: Expression; }
-export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; }
-export interface Story { id: string; title: string; world: string; scenes: Record<string, Scene>; }
+export type SkillValues = Record<Skill, number>;
+export type StoryMode = 'dialogue' | 'choices' | 'narrative' | 'science' | 'perspective' | 'end';
+export interface ScienceCheckContent { belief: string; evidence: string; takeaway: string; sources: { title: string; url: string }[]; }
+export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; }
+export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school'; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>; }
+export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; }
+
