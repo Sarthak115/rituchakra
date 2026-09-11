@@ -5,7 +5,7 @@ import { advanceStory, getChoice, initialStoryState, restoreStoryState, selectCh
 import { emptySkills, recordTransition } from './progress';
 import { updateProgress, useProgress } from './useProgress';
 
-export function useStoryPlayer(story: Story) {
+export function useStoryPlayer(story: Story, options?: { instantCaptions?: boolean }) {
   const { progress, ready, storageUnavailable } = useProgress();
   const state = restoreStoryState(story, progress.stories[story.id]?.checkpoint);
   const { sceneId, index, mode } = state;
@@ -19,7 +19,7 @@ export function useStoryPlayer(story: Story) {
   const locked = useRef(false);
   const revealKey = `${progress.language}-${progress.companion}-${sceneId}-${index}`;
   const boundaries = useMemo(() => Array.from(new Intl.Segmenter(progress.language, { granularity: 'grapheme' }).segment(dialogue.text), segment => segment.index + segment.segment.length), [dialogue.text, progress.language]);
-  const count = reveal.key === revealKey ? reveal.count : 0;
+  const count = options?.instantCaptions ? dialogue.text.length : reveal.key === revealKey ? reveal.count : 0;
   const revealing = ready && mode === 'dialogue' && count < dialogue.text.length;
   useEffect(() => {
     if (!revealing) return;

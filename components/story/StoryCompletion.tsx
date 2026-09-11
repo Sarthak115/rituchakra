@@ -4,7 +4,7 @@ import type { SkillValues, Story } from '@/lib/story/types';
 import { useLanguage } from '@/lib/useLanguage';
 export function StoryCompletion({ values, onReplay, story }: { values: SkillValues; onReplay: () => void; story: Story }) {
   const { t } = useLanguage();
-  const school = story.setting === 'school';
+  const school = story.setting !== undefined && story.setting !== 'home';
   return <section className="story-completion" aria-labelledby="complete-heading">
     <Flower2 className="completion-flower" size={34} strokeWidth={1.4}/><p className="eyebrow">{story.world} · {t('Story complete')}</p>
     <h2 id="complete-heading">{t('Story Complete')}</h2><p className="completion-subtitle">{t('You didn’t just learn the answer.')}<br/>{t('You learned how to handle the conversation.')}</p>

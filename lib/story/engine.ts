@@ -30,7 +30,17 @@ export function restoreStoryState(story: Story, value: unknown): StoryState {
   if (!scene || !Number.isInteger(state.index) || state.index < 0 || state.index >= Math.max(scene.dialogue.length, 1)) return fallback;
   if (state.mode !== (scene.kind ?? 'dialogue') && !(state.mode === 'choices' && scene.choices?.length && state.index === scene.dialogue.length - 1)) return fallback;
   if (state.choiceId !== null && !getChoice(story, state.choiceId)) return fallback;
-  if (state.sceneId !== fallback.sceneId && !state.choiceId) return fallback;
+  // A story may introduce a perspective transition before its first decision.
+  if (state.sceneId !== fallback.sceneId && !state.choiceId) {
+    let cursor: string | undefined = fallback.sceneId;
+    const visited = new Set<string>();
+    while (cursor && cursor !== state.sceneId && !visited.has(cursor)) {
+      visited.add(cursor);
+      const intro: Story['scenes'][string] | undefined = story.scenes[cursor];
+      cursor = intro?.choices?.length ? undefined : intro?.nextScene;
+    }
+    if (cursor !== state.sceneId) return fallback;
+  }
   const choiceIds = state.choiceIds ?? (state.choiceId ? [state.choiceId] : []);
   if (!Array.isArray(choiceIds) || choiceIds.some(id => !getChoice(story, id))) return fallback;
   return { sceneId: state.sceneId, index: state.index, mode: state.mode, choiceId: state.choiceId, choiceIds };
