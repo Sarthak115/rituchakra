@@ -1,6 +1,8 @@
 export type CharacterId = 'aara' | 'aarav' | 'dadi';
 export type Companion = Exclude<CharacterId, 'dadi'>;
-export type Expression = 'idle' | 'happy' | 'thinking' | 'confused' | 'surprised' | 'concerned' | 'relieved';
+export type FaceExpression = 'neutral' | 'curious' | 'worried' | 'embarrassed' | 'thinking' | 'happy' | 'surprised' | 'reassuring';
+// Older story data uses idle/confused/concerned/relieved; the character rig maps them onto the faces above.
+export type Expression = FaceExpression | 'idle' | 'confused' | 'concerned' | 'relieved';
 export type Animation = 'idle' | 'talking' | 'enter' | 'exit' | 'bounce' | 'react' | 'think' | 'celebrate';
 export type Skill = 'gyaan' | 'samvaad' | 'saath' | 'badlav';
 export interface Dialogue { id: string; speaker: CharacterId | 'companion'; text: string; translation: string; expression: Expression; listener: Expression; }

@@ -1,4 +1,5 @@
 import { LanguageBoundary } from '@/components/layout/LanguageBoundary';
+import { MotionProvider } from '@/components/motion/MotionProvider';
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -21,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased"><LanguageBoundary>{children}</LanguageBoundary></body>
+      <body className="antialiased"><LanguageBoundary><MotionProvider>{children}</MotionProvider></LanguageBoundary></body>
     </html>
   );
 }
