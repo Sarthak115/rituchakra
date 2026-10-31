@@ -2,9 +2,6 @@
 // MACHINE DRAFT – NEEDS NATIVE REVIEW; status is tracked in docs/translations-qa.md.
 export const demoUpgradeCopy: Record<string, [string, string]> = {
   // Story controls
-  'Pause': ['रोकें', 'ରୋକନ୍ତୁ'],
-  'Auto-play': ['अपने आप चलाएँ', 'ଆପେ ଆପେ ଚଳାନ୍ତୁ'],
-  'Next': ['आगे', 'ଆଗକୁ'],
   'What happened next': ['आगे क्या हुआ', 'ତା’ପରେ କ’ଣ ହେଲା'],
   'You chose': ['आपने चुना', 'ଆପଣ ବାଛିଲେ'],
   'See what happens': ['देखें आगे क्या होता है', 'ଦେଖନ୍ତୁ କ’ଣ ହୁଏ'],

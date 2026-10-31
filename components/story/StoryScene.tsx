@@ -24,9 +24,6 @@ import { ScienceCheck } from '@/components/science/ScienceCheck';
 import { StoryCompletion } from './StoryCompletion';
 import { SkillGain } from './SkillGain';
 
-// Reading time after a line is fully shown, before auto-play moves on.
-const dwellFor = (text: string) => Math.min(7000, Math.max(2200, 1200 + text.length * 48));
-
 export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) {
   const { language, t, copy: en } = useLanguage();
   const story = useMemo(() => localizeStory(storyData, language), [storyData, language]);
@@ -35,7 +32,6 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
   const peers = school || bazaar;
   const [introPending, setIntroPending] = useState(true);
   const [consequence, setConsequence] = useState<Choice | null>(null);
-  const [autoOn, setAutoOn] = useState(true);
   const player = useStoryPlayer(story, { hold: introPending || !!consequence });
   const { companion, sceneId, index, mode, scene, dialogue, pendingChoice, transitioning, revealing, count, advance, restart, choose, ready } = player;
   const speaker = dialogue.speaker === 'companion' ? companion : dialogue.speaker;
@@ -44,12 +40,8 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
   const showIntro = ready && introPending && atStart;
   const showConsequence = !!consequence && !transitioning && mode === 'dialogue';
   const talking = mode === 'dialogue' && !showIntro && !showConsequence;
-  const lineDone = count >= dialogue.text.length;
-  const dwell = dwellFor(dialogue.text);
   const actionRef = useRef<HTMLDivElement>(null);
   const initialFocus = useRef(true);
-  const advanceRef = useRef(advance);
-  useEffect(() => { advanceRef.current = advance; });
   useStoryTool({ companion, scene: sceneId, speaker, dialogue: mode === 'dialogue' ? dialogue.text : scene.narrative ?? scene.scienceCheck?.evidence ?? '', mode, choices: mode === 'choices' ? (scene.choices ?? []).map(c => ({ id: c.id, text: c.text })) : [] });
   useEffect(() => {
     if (initialFocus.current) { initialFocus.current = false; return; }
@@ -61,16 +53,6 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
     const timer = setTimeout(() => setIntroPending(false), atStart ? 2400 : 0);
     return () => clearTimeout(timer);
   }, [ready, introPending, atStart]);
-  useEffect(() => {
-    if (!autoOn || !talking || !lineDone || !ready) return;
-    const timer = setTimeout(() => advanceRef.current(), dwell);
-    return () => clearTimeout(timer);
-  }, [autoOn, talking, lineDone, ready, dwell, sceneId, index]);
-  useEffect(() => {
-    if (!autoOn || !showConsequence) return;
-    const timer = setTimeout(() => setConsequence(null), 5500);
-    return () => clearTimeout(timer);
-  }, [autoOn, showConsequence]);
 
   function pick(choice: Choice) { setConsequence(choice.consequence ? choice : null); choose(choice); }
   function restartStory(next?: Companion) { setConsequence(null); setIntroPending(true); restart(next); }
@@ -97,7 +79,7 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
         <div className="story-interaction" ref={actionRef}><SkillGain gains={player.gains}/>
           <SceneTransition sceneKey={`${sceneId}-${mode}-${showConsequence}`}>
             {showConsequence && consequence && <ConsequenceCard choice={consequence} onContinue={() => setConsequence(null)}/>}
-            {mode === 'dialogue' && !showConsequence && <DialogueBox dialogue={dialogue} speaker={en[speaker]} count={count} onContinue={advance} focusKey={`${sceneId}-${index}`} side={speaker === left ? 'left' : 'right'} line={[index + 1, scene.dialogue.length]} auto={{ on: autoOn, toggle: () => setAutoOn(on => !on), dwell }}/>}
+            {mode === 'dialogue' && !showConsequence && <DialogueBox dialogue={dialogue} speaker={en[speaker]} count={count} onContinue={advance} focusKey={`${sceneId}-${index}`} side={speaker === left ? 'left' : 'right'} line={[index + 1, scene.dialogue.length]}/>}
             {mode === 'choices' && <section className="choices-panel"><div className="choices-heading"><span className="eyebrow">{t('YOUR TURN')}</span><h2>{scene.choicePrompt ?? en.choose}</h2><p>{en.chooseHint}</p></div><div className="choices-list">{scene.choices?.map((choice, i) => <ChoiceButton key={choice.id} choice={choice} index={i} selected={transitioning ? pendingChoice?.id ?? null : null} disabled={transitioning || !ready} onSelect={() => pick(choice)}/>)}</div></section>}
             {mode === 'narrative' && <section className="story-narrative"><span className="eyebrow">{t('A MOMENT TO REFLECT')}</span><h2>{scene.narrative}</h2><button className="continue-button" onClick={advance}>{t(story.scenes[scene.nextScene ?? '']?.kind === 'science' ? 'Let’s check together' : 'Continue')}<ArrowRight size={17}/></button></section>}
             {mode === 'perspective' && <PerspectiveSwitch onContinue={advance}/>}
