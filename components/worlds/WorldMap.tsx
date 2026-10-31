@@ -1,40 +1,28 @@
 'use client';
 import { useLanguage } from '@/lib/useLanguage';
 import { LanguageSelector } from '@/components/layout/LanguageSelector';
-import { WorldProgress } from '@/components/worlds/WorldProgress';
 import { CompanionPicker } from '@/components/characters/CompanionPicker';
-import { BookOpen, Building2, Flower2, House, LockKeyhole, School, Store, Trees } from 'lucide-react';
-
-
-
-const worlds = [
-  { name: 'Ghar', theme: 'Family & Traditions', icon: House, color: 'ghar', available: true, path: '/ghar', storyId: 'ghar-dadi-rasoi' },
-  { name: 'Vidyalaya', theme: 'School & Adolescence', icon: School, color: 'school', available: true, path: '/vidyalaya', storyId: 'vidyalaya-the-stain' },
-  { name: 'Bazaar', theme: 'Products & Choices', icon: Store, color: 'bazaar', available: true, path: '/bazaar', storyId: 'bazaar-choose-what-fits' },
-  { name: 'Sakhi Sabha', theme: 'Allyship & Community', icon: Trees, color: 'sakhi', available: true, path: '/sakhi-sabha', storyId: 'sakhi-sabha-the-joke' },
-  { name: 'Nagar', theme: 'Modern Life', icon: Building2, color: 'nagar' },
-];
+import { IslandMap } from '@/components/worlds/IslandMap';
+import { updateProgress, useProgress } from '@/lib/story/useProgress';
+import { Flower2, Volume2, VolumeX } from 'lucide-react';
 
 export function WorldMap() {
   const { t } = useLanguage();
+  const { progress } = useProgress();
   return <main className={'world-map-map'}>
-    <header className={'world-map-header'}><span className={'world-map-brand'}><Flower2 size={33} strokeWidth={1.5}/>RituChakra</span><span className={'world-map-headerNote'}><BookOpen size={16}/> {t('Stories that open conversations')}</span><LanguageSelector/></header>
-    <section className={'world-map-intro'}>
+    <header className={'world-map-header'}><span className={'world-map-brand'}><Flower2 size={33} strokeWidth={1.5}/>RituChakra</span><span className="world-map-header-actions">
+      <button type="button" className="sound-toggle" aria-pressed={!progress.muted} onClick={() => updateProgress(current => ({ ...current, muted: !current.muted }))} aria-label={t(progress.muted ? 'Sound off' : 'Sound on')} title={t(progress.muted ? 'Sound off' : 'Sound on')}>{progress.muted ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button>
+      <LanguageSelector/></span></header>
+    <section className={'world-map-intro island-intro'}>
       <p className={'world-map-eyebrow'}>{t("RITUCHAKRA STORY WORLDS")}</p>
-      <h1>{t("Change the story.")}<br/><em>{t("Change the conversation.")}</em></h1>
-      <p className={'world-map-description'}>{t("An interactive journey through real-life menstrual-health conversations.")}</p>
+      <h1>{t("Change the story.")} <em>{t("Change the conversation.")}</em></h1>
+      <p className={'world-map-description'}>{t('Pick who sails with you, then tap an island to start a story.')}</p>
     </section>
     <section className={'world-map-worlds'} aria-labelledby="worlds-heading">
-      <div className={'world-map-sectionHeading'}><span aria-hidden="true"/><h2 id="worlds-heading">{t("Choose your story world")}</h2><span aria-hidden="true"/></div>
-      <CompanionPicker/><div className={'world-map-grid'}>{worlds.map(({ name, theme, icon: Icon, color, available, path, storyId }, index) => {
-        const content = <><div className={`${'world-map-illustration'} ${`world-map-${color}`}`}><span className={'world-map-worldNumber'}>0{index + 1}</span><Icon size={61} strokeWidth={1.15}/><span className={'world-map-ground'} aria-hidden="true"/></div><div className={'world-map-cardBody'}><h3>{t(name)}</h3><p>{t(theme)}</p>{available ? <WorldProgress storyId={storyId!}/> : <span className="world-map-upcoming"><LockKeyhole size={12}/>{t('Coming soon')}</span>}</div></>;
-        return available ? <a key={name} href={path} className={`${'world-map-card'} ${'world-map-active'}`}>{content}</a> : <article key={name} className={'world-map-card'} aria-label={`${t(name)} — ${t(theme)} — ${t('Coming soon')}`}>{content}</article>;
-      })}</div>
-      <p className={'world-map-invitation'}>{t("Your first story begins at home. Step into")} <strong>{t('Dadi Ki Rasoi')}.</strong></p>
+      <h2 id="worlds-heading" className="sr-only">{t("Choose your story world")}</h2>
+      <div className="island-stage"><CompanionPicker/><IslandMap/></div>
     </section>
     {/* RituReels is out of the current plan: unlinked here, while /ritureels and its data stay intact. */}
     <footer className={'world-map-footer'}><Flower2 size={19} strokeWidth={1.3}/><p>{t("Respect the person. Question the belief. Verify the fact.")}</p></footer>
   </main>;
 }
-
-

@@ -100,3 +100,47 @@ html:lang(hi) body{font-family:'Noto Sans Devanagari','Nirmala UI',Arial,sans-se
 .vote-tally output{min-width:36px;text-align:center;font:600 26px Georgia,serif;color:var(--ink)}
 .vote-leader .choice-button{border-color:var(--teal);box-shadow:0 0 0 3px #3060524d;background:#eef2e6}
 @media(max-width:800px){.classroom-toggle span{display:none}.classroom-mode .dialogue-quote{font-size:26px}.classroom-mode .choices-panel{grid-template-columns:1fr}.classroom-mode .choice-button strong{font-size:17px}.vote-tally{padding:3px 5px;gap:3px}.vote-tally button{width:34px;height:34px}.vote-tally output{min-width:26px;font-size:21px}}
+
+/* Island voyage homepage: five story islands in a calm sea; the chosen companion sails between them. */
+.world-map-header-actions{display:flex;align-items:center;gap:10px}
+.sound-toggle{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:#fffaf0;color:var(--teal)}.sound-toggle[aria-pressed=false]{color:var(--muted)}
+.island-intro{padding:26px 16px 14px}.island-intro h1{font-size:clamp(30px,3.6vw,46px)}.island-intro .world-map-description{margin-top:10px}
+.island-map{position:relative;width:100%;max-width:1240px;margin:8px auto 0;aspect-ratio:16/8.4;max-height:72vh;min-height:420px;border-radius:28px;overflow:hidden;border:1px solid #b9ddd6;box-shadow:0 18px 40px #3a6b6214;touch-action:pan-y}
+.island-map-tall{aspect-ratio:3/5;max-height:none;min-height:0;border-radius:22px}
+.island-sea{position:absolute;inset:0;background:linear-gradient(#bfe6e1,#93d0c9 55%,#7fc3bd)}
+.island-sea-waves{position:absolute;inset:-10% -10%;background-image:radial-gradient(ellipse 22px 4px at 50% 50%,#ffffff55 60%,transparent 62%);background-size:120px 46px;animation:sea-drift 18s linear infinite}
+.island-sun{position:absolute;right:6%;top:8%;width:9%;aspect-ratio:1;border-radius:50%;background:#fbe3a4;box-shadow:0 0 0 14px #fbe3a433,0 0 0 30px #fbe3a41a}
+.island-clouds{position:absolute;inset:0}.island-clouds span{position:absolute;height:9%;aspect-ratio:3.2;border-radius:40px;background:#ffffffd9;animation:cloud-drift 60s linear infinite}
+.island-clouds span:before{content:'';position:absolute;left:22%;bottom:40%;width:45%;aspect-ratio:1;border-radius:50%;background:inherit}
+.island-clouds span:nth-child(1){left:8%;top:6%;animation-duration:70s}.island-clouds span:nth-child(2){left:46%;top:13%;height:7%;animation-duration:90s;animation-delay:-30s}.island-clouds span:nth-child(3){left:72%;top:4%;height:6%;animation-duration:80s;animation-delay:-55s}
+.island-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.island-route path{fill:none;stroke:#fffdf3;stroke-width:3;stroke-dasharray:2 9;stroke-linecap:round;opacity:.85;animation:route-flow 2.5s linear infinite}
+.island-list{position:absolute;inset:0;list-style:none;margin:0;padding:0}
+.island{position:absolute;width:19%;translate:-50% -50%}.island-map-tall .island{width:46%}
+.island>a,.island>button{display:flex;flex-direction:column;align-items:center;width:100%;border:0;background:none;padding:0;color:inherit;cursor:pointer;border-radius:20px}
+.island>a:focus-visible,.island>button:focus-visible{outline:3px solid #fffdf3;outline-offset:2px}
+.island-float{display:block;width:100%;transition:transform .25s}.island>a:hover .island-float,.island>a:focus-visible .island-float{transform:scale(1.07)}
+.island-art{display:block;width:100%;height:auto;overflow:visible}.island-art.is-locked{filter:saturate(.35) brightness(1.05)}
+.island-label{position:relative;display:flex;align-items:center;gap:7px;margin-top:-6%;padding:6px 12px 6px 6px;border-radius:30px;background:#fffaf0f2;border:1px solid #e3d5b8;box-shadow:0 3px 8px #3a5a5214;white-space:nowrap;font-size:13px}
+.island-label strong{font:400 17px Georgia,serif;color:var(--ink)}.island-label small{display:none;color:var(--muted);font-size:11px}
+.island-number{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--teal);color:#fff9ec;font-size:12px;font-weight:700}
+.island-label.is-done .island-number{background:#c4762b}.island-badge{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#e8eddf;color:var(--teal)}
+.island-label.is-locked{opacity:.85}.island-label.is-locked .island-number{background:#9aa3a0}.island-soon{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--muted)}
+.lantern{animation:lantern-glow 2.6s ease-in-out infinite;transform-box:fill-box}.lantern-1{animation-delay:-.8s}.lantern-2{animation-delay:-1.6s}
+.island-boat{position:absolute;width:9%;min-width:84px;translate:-50% -100%;z-index:3;pointer-events:none}.island-map-tall .island-boat{width:20%}
+.island-boat-bob{position:relative;display:flex;flex-direction:column;align-items:center}
+.island-boat-rider{width:62%;height:0;padding-bottom:64%;position:relative;overflow:hidden;margin-bottom:-15%;z-index:0}
+.island-boat-rider .character{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:250/410}
+.island-boat-hull{width:100%;height:auto;position:relative;z-index:1}
+.island-wake{position:absolute;bottom:-4px;left:50%;width:120%;height:12px;translate:-50% 0;border-radius:50%;border:2px solid #ffffffaa;animation:wake 0.9s ease-out infinite}
+.island-greeting{position:absolute;bottom:100%;left:50%;translate:-30% -6px;width:max-content;max-width:230px;margin:0;padding:10px 14px;border-radius:16px 16px 16px 4px;background:#fffaf0;border:1px solid #e3d5b8;box-shadow:0 6px 16px #3a5a521f;font:15px/1.4 Georgia,serif;color:var(--ink)}
+@keyframes sea-drift{to{background-position:240px 46px}}@keyframes cloud-drift{from{translate:0 0}50%{translate:6vw 0}to{translate:0 0}}@keyframes route-flow{to{stroke-dashoffset:-22}}
+@keyframes lantern-glow{0%,100%{translate:0 0;opacity:.85}50%{translate:0 -4px;opacity:1}}@keyframes wake{from{opacity:.9;scale:.6}to{opacity:0;scale:1.3}}
+@media(max-width:1100px){.island-label strong{font-size:15px}}
+@media(max-width:700px){.island-intro{padding:20px 4px 6px}.island-label{font-size:12px;padding:5px 10px 5px 5px}.island-label strong{font-size:15px}.island-greeting{font-size:13px;max-width:180px;translate:-20% -6px}.sound-toggle{width:36px;height:36px}}
+@media(prefers-reduced-motion:reduce){.island-sea-waves,.island-clouds span,.island-route path,.lantern,.island-wake{animation:none}}
+.island-stage{position:relative;max-width:1240px;margin:0 auto}
+.island-stage .map-companion-picker{position:absolute;left:16px;top:14px;z-index:5;margin:0;padding:8px 10px 10px;border-radius:18px;background:#fffaf0eb;border:1px solid #e3d5b8;box-shadow:0 6px 16px #3a5a521a}
+.island-stage .map-companion-picker legend{float:left;width:auto;margin:0 0 6px;font-size:12px;text-align:left}
+.island-intro{padding:16px 16px 12px}.island-intro .world-map-eyebrow{margin-bottom:8px}
+.island-map-wide{aspect-ratio:auto;height:clamp(420px,calc(100vh - 220px),720px);max-height:none;margin-top:0}
+@media(max-width:700px){.island-stage .map-companion-picker{position:static;width:max-content;margin:0 auto 12px;background:none;border:0;box-shadow:none;padding:0}.island-stage .map-companion-picker legend{float:none;width:100%;text-align:center}}

@@ -139,6 +139,16 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 | Remove a vote | एक वोट हटाएँ | ଗୋଟିଏ ଭୋଟ୍ କାଢ଼ନ୍ତୁ | Machine draft | |
 | votes | वोट | ଭୋଟ୍ | Machine draft | |
 
+### Island voyage homepage
+
+| English | Hindi | Odia | Status | Notes |
+|---|---|---|---|---|
+| Pick who sails with you, then tap an island to start a story. | चुनें कि आपके साथ कौन सफ़र करेगा, फिर कहानी शुरू करने के लिए किसी द्वीप पर टैप करें। | ବାଛନ୍ତୁ ଆପଣଙ୍କ ସହ କିଏ ଯାତ୍ରା କରିବ, ତା’ପରେ କାହାଣୀ ଆରମ୍ଭ କରିବାକୁ ଏକ ଦ୍ୱୀପ ଉପରେ ଟ୍ୟାପ୍ କରନ୍ତୁ। | Machine draft | |
+| Hi! I’m | नमस्ते! मैं हूँ | ନମସ୍କାର! ମୁଁ | Machine draft | |
+| Which island shall we sail to? | चलो, किस द्वीप पर चलें? | ଚାଲ, କେଉଁ ଦ୍ୱୀପକୁ ଯିବା? | Machine draft | |
+| Sound on | आवाज़ चालू | ଶବ୍ଦ ଚାଲୁ | Machine draft | |
+| Sound off | आवाज़ बंद | ଶବ୍ଦ ବନ୍ଦ | Machine draft | |
+
 ### Choose What Fits – shortened existing line (unsourced second sentence removed)
 
 | English | Hindi | Odia | Status | Notes |
@@ -149,7 +159,7 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 
 | English | Issue | Status |
 |---|---|---|
-| I mentioned needing a pad. A classmate said, ‘Why so serious? Is it a period emergency?’ | HI says एक दोस्त ("a friend") but EN says "a classmate"; OR says ସହପାଠୀ (classmate). Inner quotes changed to ‘ ’ in all languages. | Needs review |
+| I mentioned needing a pad. A classmate said, ‘Why so serious? Is it a period emergency?’ | HI says एक दोस्त (a friend) but EN says a classmate; OR says ସହପାଠୀ (classmate). Inner quotes changed to ‘ ’ in all languages. | Needs review |
 
 ## Review checklist
 

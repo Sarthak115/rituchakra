@@ -5,7 +5,7 @@ export const skillKeys: Skill[] = ['gyaan', 'samvaad', 'saath', 'badlav'];
 export const emptySkills = (): SkillValues => ({ gyaan: 0, samvaad: 0, saath: 0, badlav: 0 });
 export interface StoryRecord { checkpoint?: StoryState; choiceAwarded: boolean; completed: boolean; }
 // `classroom` = shared-screen mode (extra-large text, class vote). A device setting, not learner data.
-export interface LearnerProgress { version: 1; language: 'en' | 'hi' | 'or'; companion: Companion; classroom?: boolean; skills: SkillValues; stories: Record<string, StoryRecord>; }
+export interface LearnerProgress { version: 1; language: 'en' | 'hi' | 'or'; companion: Companion; classroom?: boolean; muted?: boolean; skills: SkillValues; stories: Record<string, StoryRecord>; }
 export const emptyProgress = (): LearnerProgress => ({ version: 1, language: 'en', companion: 'aara', skills: emptySkills(), stories: {} });
 export function parseProgress(raw: string | null): LearnerProgress {
   const result = emptyProgress();
@@ -15,6 +15,7 @@ export function parseProgress(raw: string | null): LearnerProgress {
     if (value.language === 'hi' || value.language === 'or') result.language = value.language;
     if (value.companion === 'aarav') result.companion = 'aarav';
     if (value.classroom === true) result.classroom = true;
+    if (value.muted === true) result.muted = true;
     for (const key of skillKeys) if (Number.isFinite(value.skills?.[key])) result.skills[key] = Math.max(0, Math.min(100, Math.round(value.skills[key])));
     if (value.stories && typeof value.stories === 'object') for (const [id, entry] of Object.entries(value.stories)) {
       if (!entry || typeof entry !== 'object' || id === '__proto__') continue;

@@ -5,7 +5,7 @@
 
 ## Before you present (10 minutes before)
 
-1. Open the demo URL (see *Where to run it* below) in **Chrome**. Close other tabs.
+1. Open the demo URL (see *Where to run it* below) in **Chrome**. Close other tabs. Sound is on by default (soft taps and chimes); use the speaker button at the top right to mute it if the room needs quiet.
 2. Open **Vidyalaya → Restart story** (top right) so the story starts fresh, then go back to the map. Do the same on **Ghar** if you will show it.
 3. Keep the browser window **in front and visible**. Browsers pause animation in hidden or background windows, so characters look frozen if you switch away and come back mid-line.
 4. Language: **English**. Companion: **Aara**.
@@ -15,8 +15,8 @@
 
 | Time | Do | Say (suggested) |
 |---|---|---|
-| 0:00 | Homepage. Point to the five worlds, Ghar → Nagar. | "RituChakra lets young people rehearse real period moments, at home, at school, in the market and with friends. Nagar is coming soon." |
-| 0:10 | Click **Vidyalaya**. The title card shows, then Aara speaks. | "A student notices a stain between classes. Watch the characters: the speaker is highlighted, the listener reacts." |
+| 0:00 | Homepage: the island map. Aara greets you from her boat. Point to the five islands, from Ghar to Nagar (under a cloud: coming soon). | "RituChakra is a voyage through real period moments: home, school, the market, friends, and the city. Kids pick who sails with them." |
+| 0:10 | Tap the **Vidyalaya** island. The boat sails there, then the story opens with its title card and Aara speaks. | "Watch the characters: the speaker is highlighted, the listener reacts." |
 | 0:18 | Tap **Continue** through Aara's two lines. | |
 | 0:25 | Choose **"Ask a trusted friend for help."** The consequence card appears. Tap **See what happens**, then tap through 2 lines. | "Every choice shows its consequence, without shaming the learner." |
 | 0:42 | **See their side** card → **Step into Aarav's view**. Tap through 2 lines. | "Then we switch perspective. Aarav, a boy, practises being an ally." |
