@@ -1,13 +1,13 @@
 import type { Story, Dialogue, Choice, Scene, Companion } from '@/lib/story/types';
 
 const line = (id: string, speaker: Companion, text: string, expression: Dialogue['expression'] = 'thinking', listener: Dialogue['expression'] = 'thinking'): Dialogue => ({ id, speaker, text, translation: '', expression, listener });
-const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact']): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence: '', companionExpression: 'thinking' });
+const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact'], consequence = ''): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence, companionExpression: 'thinking' });
 const scene = (id: string, progress: number, dialogue: Dialogue[], nextScene?: string): Scene => ({ id, view: 'aara', progress, dialogue, nextScene });
 
 export const chooseWhatFits: Story = {
   id: 'bazaar-choose-what-fits', title: 'Choose What Fits', world: 'Bazaar', setting: 'bazaar',
   chapter: 'CHAPTER 03', subtitle: 'Different needs. Informed choices.', context: 'Before the school trip · Neighbourhood shop', footerLabel: 'A CONVERSATION IN THE BAZAAR',
-  stages: ['Explore', 'Consider', 'Discuss', 'Evidence', 'Choose'], completionImpact: { badlav: 3 },
+  stages: ['Explore', 'Consider', 'Discuss', 'Evidence', 'Choose'], reflection: 'What questions could help someone choose a product that fits their needs?', completionImpact: { badlav: 3 },
   scenes: {
     opening: { ...scene('opening', 0, [
       line('trip', 'aara', 'The school trip is tomorrow. We will be out all day!', 'happy'),
@@ -42,9 +42,9 @@ export const chooseWhatFits: Story = {
       line('underwear-thought', 'aara', 'So I should think about my routine and what I can manage during the outing.', 'relieved'),
     ], 'conversation'),
     conversation: { ...scene('conversation', 2, [line('which', 'aarav', 'So, how will you decide what to take?')]), choicePrompt: 'How will Aara decide?', choices: [
-      choice('follow-everyone', 'Whatever everyone uses must be best.', 'popular', { samvaad: 1 }),
-      choice('personal-fit', 'I can choose what feels comfortable and practical for me.', 'informed', { gyaan: 4, samvaad: 3, saath: 3, badlav: 3 }),
-      choice('one-best', 'There should be one best product for everyone.', 'universal', { samvaad: 1 }),
+      choice('follow-everyone', 'Whatever everyone uses must be best.', 'popular', { samvaad: 1 }, 'Friends’ experiences can help, but what suits them may not suit you.'),
+      choice('personal-fit', 'I can choose what feels comfortable and practical for me.', 'informed', { gyaan: 4, samvaad: 3, saath: 3, badlav: 3 }, 'Choosing what is comfortable and practical for you is an informed choice.'),
+      choice('one-best', 'There should be one best product for everyone.', 'universal', { samvaad: 1 }, 'People have different needs, so one product may not suit everyone.'),
     ] },
     popular: scene('popular', 2, [
       line('popular-question', 'aarav', 'Friends can share their experiences, but their routines and comfort may be different from yours.'),

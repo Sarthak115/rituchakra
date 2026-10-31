@@ -1,13 +1,13 @@
 import type { Story, Dialogue, Choice, Scene, Companion } from '@/lib/story/types';
 
 const line = (id: string, speaker: Companion, text: string, expression: Dialogue['expression'] = 'thinking', listener: Dialogue['expression'] = 'thinking'): Dialogue => ({ id, speaker, text, translation: '', expression, listener });
-const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact']): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence: '', companionExpression: 'thinking' });
+const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact'], consequence = ''): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence, companionExpression: 'thinking' });
 const scene = (id: string, view: Companion, progress: number, dialogue: Dialogue[], nextScene?: string): Scene => ({ id, view, progress, dialogue, nextScene });
 
 export const theJoke: Story = {
   id: 'sakhi-sabha-the-joke', title: 'The Joke', world: 'Sakhi Sabha', setting: 'community',
   chapter: 'CHAPTER 04', subtitle: 'Small actions. A kinder space.', context: 'After class · A conversation with friends', footerLabel: 'A MOMENT OF ALLYSHIP',
-  stages: ['Notice', 'See their side', 'Respond', 'Evidence', 'Together'], completionImpact: { gyaan: 2, badlav: 3 },
+  stages: ['Notice', 'See their side', 'Respond', 'Evidence', 'Together'], reflection: 'What could you say next time a joke makes someone uncomfortable?', completionImpact: { gyaan: 2, badlav: 3 },
   scenes: {
     opening: scene('opening', 'aara', 0, [
       line('group-joke', 'aara', 'I mentioned needing a pad. A classmate said, “Why so serious? Is it a period emergency?”', 'concerned'),
@@ -19,9 +19,9 @@ export const theJoke: Story = {
       line('ally-notices', 'aarav', 'I was about to laugh, but Aara has gone quiet. She looks uncomfortable.', 'concerned', 'concerned'),
       line('ally-decision', 'aarav', 'I can choose how I respond to the group.'),
     ]), choicePrompt: 'How will Aarav respond?', choices: [
-      choice('laugh-along', 'Laugh along.', 'laugh', {}),
-      choice('stay-silent', 'Ignore it.', 'silent', { samvaad: 1 }),
-      choice('step-in', 'Step in respectfully.', 'respect', { samvaad: 5, saath: 6, badlav: 3 }),
+      choice('laugh-along', 'Laugh along.', 'laugh', {}, 'Laughing along can keep a joke going, even when no harm is meant.'),
+      choice('stay-silent', 'Ignore it.', 'silent', { samvaad: 1 }, 'Staying quiet can feel safer, but the person being teased may feel alone.'),
+      choice('step-in', 'Step in respectfully.', 'respect', { samvaad: 5, saath: 6, badlav: 3 }, 'Stepping in calmly can change the mood without embarrassing anyone.'),
     ] },
     laugh: scene('laugh', 'aarav', 2, [
       line('laugh-cost', 'aara', 'When you laughed too, the others kept going. I felt even more alone.', 'concerned', 'concerned'),
@@ -37,9 +37,9 @@ export const theJoke: Story = {
       line('respect-result', 'aara', 'They have moved on to talking about the game. I feel less singled out now.', 'relieved', 'happy'),
     ], 'check-in'),
     'check-in': { ...scene('check-in', 'aarav', 2, [line('thanks', 'aara', 'Thanks for helping stop it. I was feeling awkward.', 'relieved')]), choicePrompt: 'What would you say to Aara?', choices: [
-      choice('brush-off', 'Just ignore them.', 'dismiss', { samvaad: 1 }),
-      choice('offer-support', 'Of course. If you need any help, you can tell me.', 'support', { samvaad: 4, saath: 5, badlav: 2 }),
-      choice('too-sensitive', 'You should not be so sensitive.', 'sensitive', {}),
+      choice('brush-off', 'Just ignore them.', 'dismiss', { samvaad: 1 }, '“Just ignore them” can feel dismissive. Listening first shows you care.'),
+      choice('offer-support', 'Of course. If you need any help, you can tell me.', 'support', { samvaad: 4, saath: 5, badlav: 2 }, 'Offering help and letting her decide respects her choices.'),
+      choice('too-sensitive', 'You should not be so sensitive.', 'sensitive', {}, 'Calling someone too sensitive can make them feel their feelings do not matter.'),
     ] },
     dismiss: scene('dismiss', 'aarav', 2, [
       line('dismiss-feeling', 'aara', 'That is harder than it sounds. I would rather you listened than told me to ignore it.', 'concerned'),

@@ -22,6 +22,15 @@ export function selectChoice(story: Story, state: StoryState, id: string): Story
   if (state.mode !== 'choices' || !choice) throw new Error('This choice is not available.');
   return enterScene(story, choice.nextScene, choice.id, [...(state.choiceIds ?? (state.choiceId ? [state.choiceId] : [])), choice.id]);
 }
+// "Try another choice": return to the most recent decision with that choice undone.
+export function rewindToLastChoice(story: Story, state: StoryState): StoryState | null {
+  const choiceIds = state.choiceIds ?? (state.choiceId ? [state.choiceId] : []);
+  const last = choiceIds.at(-1);
+  const scene = Object.values(story.scenes).find(item => item.choices?.some(choice => choice.id === last));
+  if (!last || !scene) return null;
+  const previous = choiceIds.slice(0, -1);
+  return { sceneId: scene.id, index: Math.max(scene.dialogue.length - 1, 0), mode: 'choices', choiceId: previous.at(-1) ?? null, choiceIds: previous };
+}
 export function restoreStoryState(story: Story, value: unknown): StoryState {
   const fallback = initialStoryState(story);
   if (!value || typeof value !== 'object') return fallback;

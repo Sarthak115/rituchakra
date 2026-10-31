@@ -3,7 +3,7 @@ import { useLanguage } from '@/lib/useLanguage';
 import { LanguageSelector } from '@/components/layout/LanguageSelector';
 import { WorldProgress } from '@/components/worlds/WorldProgress';
 import { CompanionPicker } from '@/components/characters/CompanionPicker';
-import { ArrowRight, BookOpen, Building2, Clapperboard, Flower2, House, LockKeyhole, School, Store, Trees } from 'lucide-react';
+import { BookOpen, Building2, Flower2, House, LockKeyhole, School, Store, Trees } from 'lucide-react';
 
 
 
@@ -32,11 +32,7 @@ export function WorldMap() {
       })}</div>
       <p className={'world-map-invitation'}>{t("Your first story begins at home. Step into")} <strong>{t('Dadi Ki Rasoi')}.</strong></p>
     </section>
-    <a href="/ritureels" className="world-map-reels">
-      <span className="world-map-reels-icon" aria-hidden="true"><Clapperboard size={34} strokeWidth={1.4}/></span>
-      <div><span className="eyebrow">{t('RituReels')}</span><h2>{t('Dadi Se Baat')}</h2><p>{t('Short stories. Real beliefs. Better conversations.')}</p><small>{t('Dadi Ka Mandir')}</small></div>
-      <span className="world-map-reels-action">{t('Watch RituReels')}<ArrowRight size={19}/></span>
-    </a>
+    {/* RituReels is out of the current plan: unlinked here, while /ritureels and its data stay intact. */}
     <footer className={'world-map-footer'}><Flower2 size={19} strokeWidth={1.3}/><p>{t("Respect the person. Question the belief. Verify the fact.")}</p></footer>
   </main>;
 }

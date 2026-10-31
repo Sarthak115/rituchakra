@@ -1,5 +1,5 @@
 'use client';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import * as m from 'motion/react-m';
 import { useReducedMotion, type Transition } from 'motion/react';
 import { useLanguage } from '@/lib/useLanguage';
@@ -43,9 +43,17 @@ export function Character({ character, expression = 'neutral', animation = 'idle
   const look2 = listening ? facing * 1.6 : 0;
   const [px, py] = pose.pupils;
 
+  // Gestures step between two poses on a slow beat. Plain target changes (not an infinite
+  // keyframe loop) so the arm always settles back when the line ends, even after fast clicks.
+  const [beat, setBeat] = useState(0);
+  useEffect(() => {
+    if (!speaking || reduce) return;
+    const timer = setInterval(() => setBeat(value => value + 1), 1300);
+    return () => clearInterval(timer);
+  }, [speaking, reduce]);
   const gestureArm = facing === 1 ? 'right' : 'left';
-  const armFor = (side: 'left' | 'right'): ArmPose | ArmPose[] => {
-    if (speaking && pose.gestures && !reduce && side === gestureArm) return side === 'right' ? gesturePoses : gesturePoses.map(mirrorArm);
+  const armFor = (side: 'left' | 'right'): ArmPose => {
+    if (speaking && pose.gestures && !reduce && side === gestureArm) { const gesture = gesturePoses[beat % 2]; return side === 'right' ? gesture : mirrorArm(gesture); }
     return side === 'right' ? pose.armR : pose.armL ?? mirrorArm(pose.armR);
   };
 
@@ -59,7 +67,8 @@ export function Character({ character, expression = 'neutral', animation = 'idle
             <Arm look={look} shoulder={look.shoulders[0]} pose={armFor('left')} morph={morph}/>
             <Arm look={look} shoulder={look.shoulders[1]} pose={armFor('right')} morph={morph}/>
             <m.g style={origin(125, 165)} initial={false} animate={{ rotate: pose.tilt * facing, y: pose.drop }} transition={spring}>
-              <m.g style={origin(125, 165)} animate={reduce ? { rotate: 0, y: 0 } : speaking ? { rotate: [0, -2, 1.2, -1, 0], y: [0, -1.2, 0.4, -0.6, 0] } : { rotate: [0, 1.1, 0, -0.9, 0], y: 0 }} transition={loop(speaking ? 1.7 : 9)}>
+              <m.g style={origin(125, 165)} animate={reduce ? { rotate: 0 } : { rotate: [0, 1.1, 0, -0.9, 0] }} transition={loop(9)}>
+                <m.g style={origin(125, 165)} initial={false} animate={speaking && !reduce ? { rotate: beat % 2 ? -1.8 : 1.3, y: beat % 2 ? -1.2 : 0.4 } : { rotate: 0, y: 0 }} transition={{ duration: 0.65, ease: 'easeInOut' }}>
                 <m.g initial={false} animate={{ y: nodding ? (nod.count % 2 ? [0, 3, 0, 1.5, 0] : [0, 3.01, 0, 1.5, 0]) : 0 }} transition={{ duration: 0.9 }}>
                   <HairBack character={character}/>
                   <FaceBase character={character}/>
@@ -72,9 +81,10 @@ export function Character({ character, expression = 'neutral', animation = 'idle
                     <m.path initial={false} animate={{ d: browR }} transition={morph}/>
                   </g>
                   <FaceDetails character={character}/>
-                  <m.path fill="#7b403d" stroke="#6e3a37" strokeWidth="2.4" strokeLinejoin="round" initial={false} animate={{ d: speaking && !reduce ? talkingMouth : closedMouth }} transition={speaking && !reduce ? { duration: 0.62, repeat: Infinity, ease: 'easeInOut' } : morph}/>
+                  <m.path key={speaking && !reduce ? 'talk' : 'rest'} fill="#7b403d" stroke="#6e3a37" strokeWidth="2.4" strokeLinejoin="round" initial={false} animate={{ d: speaking && !reduce ? talkingMouth : closedMouth }} transition={speaking && !reduce ? { duration: 0.62, repeat: Infinity, ease: 'easeInOut' } : morph}/>
                   <m.path d={teethPath(pose.mouth)} fill="none" stroke="#fff6ea" strokeWidth="3.2" strokeLinecap="round" initial={false} animate={{ opacity: speaking ? 0 : pose.teeth, d: teethPath(pose.mouth) }} transition={morph}/>
                   <Accessories character={character}/>
+                </m.g>
                 </m.g>
               </m.g>
             </m.g>
@@ -107,18 +117,15 @@ function Eye({ cx, look, pose, reduce, morph }: { cx: number; look: Look; pose: 
   </m.g>;
 }
 
-function Arm({ look, shoulder, pose, morph }: { look: Look; shoulder: Pt; pose: ArmPose | ArmPose[]; morph: Transition }) {
-  const frames = (Array.isArray(pose) ? [...pose, pose[0]] : [pose]).map(p => armPaths(shoulder, p));
-  const many = frames.length > 1;
-  const value = <T,>(pick: (f: ReturnType<typeof armPaths>) => T) => many ? frames.map(pick) : pick(frames[0]);
-  const transition: Transition = many ? { duration: 2.6, repeat: Infinity, ease: 'easeInOut' } : morph;
-  const limb = value(f => f.limb), sleeve = value(f => f.sleeve);
+function Arm({ look, shoulder, pose, morph }: { look: Look; shoulder: Pt; pose: ArmPose; morph: Transition }) {
+  const { limb, sleeve, hand, bangle } = armPaths(shoulder, pose);
+  const transition: Transition = morph.duration === 0 ? morph : { duration: 0.7, ease: 'easeInOut' };
   return <g strokeLinecap="round" strokeLinejoin="round" fill="none">
     <m.path stroke={look.skinLine} strokeWidth="16.5" initial={false} animate={{ d: limb }} transition={transition}/>
     <m.path stroke={look.skin} strokeWidth="13.5" initial={false} animate={{ d: limb }} transition={transition}/>
     <m.path stroke={look.clothLine} strokeWidth="19" initial={false} animate={{ d: sleeve }} transition={transition}/>
     <m.path stroke={look.cloth} strokeWidth="16" initial={false} animate={{ d: sleeve }} transition={transition}/>
-    {look.bangles && <m.circle r="7.2" stroke="#d9ad53" strokeWidth="2.6" initial={false} animate={{ cx: value(f => f.bangle[0]), cy: value(f => f.bangle[1]) }} transition={transition}/>}
-    <m.circle r="7.6" fill={look.skin} stroke={look.skinLine} strokeWidth="1.5" initial={false} animate={{ cx: value(f => f.hand[0]), cy: value(f => f.hand[1]) }} transition={transition}/>
+    {look.bangles && <m.circle r="7.2" stroke="#d9ad53" strokeWidth="2.6" initial={false} animate={{ cx: bangle[0], cy: bangle[1] }} transition={transition}/>}
+    <m.circle r="7.6" fill={look.skin} stroke={look.skinLine} strokeWidth="1.5" initial={false} animate={{ cx: hand[0], cy: hand[1] }} transition={transition}/>
   </g>;
 }

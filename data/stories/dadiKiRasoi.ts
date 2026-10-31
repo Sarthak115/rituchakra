@@ -1,6 +1,6 @@
 import type { Story } from '@/lib/story/types';
 export const dadiKiRasoi: Story = {
-  id: 'ghar-dadi-rasoi', title: 'Dadi Ki Rasoi', world: 'Ghar', startScene: 'opening', completionImpact: { badlav: 4 },
+  id: 'ghar-dadi-rasoi', title: 'Dadi Ki Rasoi', world: 'Ghar', startScene: 'opening', reflection: 'Is there a belief in your family you would like to understand better? How could you ask about it respectfully?', completionImpact: { badlav: 4 },
   scenes: {
     opening: { id: 'opening', dialogue: [
       { id: 'belief', speaker: 'dadi', text: 'Beta, tumhare periods ke time kitchen mein nahi jaana chahiye.', translation: 'Dear, you shouldn’t go into the kitchen during your period.', expression: 'concerned', listener: 'confused' },
