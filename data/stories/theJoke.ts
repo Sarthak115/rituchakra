@@ -56,9 +56,13 @@ export const theJoke: Story = {
     reflection: { ...scene('reflection', 'aarav', 2, [], 'science'), kind: 'narrative', narrative: 'Being an ally doesn’t mean speaking for someone. It means helping create a space where they feel safe and respected.' },
     science: { ...scene('science', 'aarav', 3, [], 'resolution'), kind: 'science', scienceCheck: {
       belief: 'Periods are embarrassing, so jokes about them are harmless.',
-      evidence: 'Menstruation is a normal biological process. Teasing or shaming someone about it can make them feel embarrassed or unsafe. Respectful support helps create a healthier environment.',
+      // Wording mirrors WHO and UNICEF; see docs/health-evidence-register.md (claims JK-1 to JK-2).
+      evidence: 'Menstruation is a natural bodily process. Stigma about periods can harm a person’s well-being and even how long they stay in school. Some girls avoid school during their period out of fear of bullying.',
       takeaway: 'Respect the person. Challenge the stigma. Be a Sakhi.',
-      sources: [{ title: 'UNICEF: Menstrual health and hygiene', url: 'https://www.unicef.org/wash/menstrual-hygiene' }],
+      sources: [
+        { title: 'WHO: Menstrual health fact sheet', url: 'https://www.who.int/news-room/fact-sheets/detail/menstrual-health' },
+        { title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' },
+      ],
     } },
     resolution: scene('resolution', 'aarav', 4, [
       line('ally-ending', 'aarav', 'Making a joke is easy. Supporting a friend should be easy too.', 'happy', 'relieved'),

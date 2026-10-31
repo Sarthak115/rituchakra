@@ -22,7 +22,7 @@ export const chooseWhatFits: Story = {
       choice('period-underwear', 'Period underwear', 'underwear', { gyaan: 2 }),
     ] },
     disposable: scene('disposable', 1, [
-      line('pad-fit', 'aara', 'A disposable pad could be practical if I already feel comfortable using it. It is often easy to find.'),
+      line('pad-fit', 'aara', 'A disposable pad could be practical if I already feel comfortable using it.'),
       line('pad-plan', 'aarav', 'We can check the cost and pack enough. You will still need somewhere to change and dispose of used pads.'),
       line('pad-thought', 'aara', 'Convenient for some situations, but it does not have to be everyone’s choice.', 'relieved'),
     ], 'conversation'),
@@ -32,12 +32,12 @@ export const chooseWhatFits: Story = {
       line('reuse-thought', 'aara', 'I should think about the trip facilities and the care instructions, not just the product.', 'relieved'),
     ], 'conversation'),
     cup: scene('cup', 1, [
-      line('cup-fit', 'aara', 'A menstrual cup is reusable. It takes learning, correct use, cleaning and comfort with insertion.'),
+      line('cup-fit', 'aara', 'A menstrual cup can be reused for years. It takes learning, boiling it after each period, and comfort with insertion.'),
       line('cup-plan', 'aarav', 'You do not need to try something unfamiliar just because someone recommends it.'),
       line('cup-thought', 'aara', 'Yes. I can take my time learning about it. I do not have to try it on the trip.', 'relieved'),
     ], 'conversation'),
     underwear: scene('underwear', 1, [
-      line('underwear-fit', 'aara', 'Period underwear absorbs menstrual blood. It can suit some people, but comfort, availability and cost matter.'),
+      line('underwear-fit', 'aara', 'Period underwear is made of absorbent fabric. It can suit some people, but comfort, availability and cost matter.'),
       line('underwear-plan', 'aarav', 'You would also need a plan for changing, carrying used underwear and washing it according to its instructions.'),
       line('underwear-thought', 'aara', 'So I should think about my routine and what I can manage during the outing.', 'relieved'),
     ], 'conversation'),
@@ -60,9 +60,14 @@ export const chooseWhatFits: Story = {
     ], 'science'),
     science: { ...scene('science', 3, [], 'resolution'), kind: 'science', scienceCheck: {
       belief: 'One menstrual product is best for everyone.',
-      evidence: 'There is no single menstrual product that is best for everyone. The right choice can depend on comfort, access, cost, routine, personal preference, and how the product is used and cared for.',
+      // Wording mirrors UNICEF, UNFPA and WHO; see docs/health-evidence-register.md (claims BZ-1 to BZ-5).
+      evidence: 'The choice of product is very personal. It depends on what feels comfortable, what is available where you live, cost, and whether you can wash, dry or dispose of it properly. Used disposable pads go in a bin, never down the toilet.',
       takeaway: 'Know your options. Choose what fits.',
-      sources: [{ title: 'UNICEF: Guide to menstrual hygiene materials', url: 'https://www.unicef.org/documents/guide-menstrual-hygiene-materials' }],
+      sources: [
+        { title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' },
+        { title: 'UNICEF: Guide to menstrual hygiene materials', url: 'https://www.unicef.org/documents/guide-menstrual-hygiene-materials' },
+        { title: 'UNFPA: Menstruation and human rights – FAQ', url: 'https://www.unfpa.org/menstruationfaq' },
+      ],
     } },
     resolution: scene('resolution', 4, [
       line('best-ending', 'aarav', 'So the “best product” does not have to be the same for everyone?', 'thinking', 'happy'),

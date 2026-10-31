@@ -1,5 +1,11 @@
-import type { Choice, Story, StoryState } from './types';
+import type { Choice, Companion, Story, StoryState } from './types';
 
+// The version of a story the chosen companion plays. Choice ids stay the same, so saves and rewards carry over.
+export function storyForCompanion(story: Story, companion: Companion): Story {
+  const overrides = story.companionScenes?.[companion];
+  if (!overrides) return story;
+  return { ...story, scenes: Object.fromEntries(Object.entries(story.scenes).map(([id, scene]) => [id, overrides[id] ? { ...scene, ...overrides[id] } : scene])) };
+}
 export function enterScene(story: Story, sceneId: string, choiceId: string | null = null, choiceIds: string[] = []): StoryState {
   const scene = story.scenes[sceneId];
   if (!scene) throw new Error(`Unknown story scene: ${sceneId}`);

@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronsRight } from 'lucide-react';
 import type { Dialogue } from '@/lib/story/types';
 import { useLanguage } from '@/lib/useLanguage';
-export function DialogueBox({ dialogue, speaker, count, onContinue, focusKey, passive = false, side, line }: { dialogue: Dialogue; speaker: string; count: number; onContinue: () => void; focusKey: string; passive?: boolean; side?: 'left' | 'right'; line?: [number, number] }) {
+export function DialogueBox({ dialogue, speaker, count, onContinue, focusKey, passive = false, side, line }: { dialogue: Dialogue; speaker: string; count: number; onContinue: () => void; focusKey: string; passive?: boolean; side?: 'left' | 'right' | 'guest'; line?: [number, number] }) {
   const { t, copy: en } = useLanguage();
   const revealing = count < dialogue.text.length;
   const Caption = passive ? 'div' : 'button';

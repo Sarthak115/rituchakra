@@ -20,13 +20,16 @@ import { SceneTransition } from './SceneTransition';
 import { SceneIntro } from './SceneIntro';
 import { ConsequenceCard } from './ConsequenceCard';
 import { useStoryPlayer } from '@/lib/story/useStoryPlayer';
+import { useProgress } from '@/lib/story/useProgress';
+import { storyForCompanion } from '@/lib/story/engine';
 import { ScienceCheck } from '@/components/science/ScienceCheck';
 import { StoryCompletion } from './StoryCompletion';
 import { SkillGain } from './SkillGain';
 
 export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) {
   const { language, t, copy: en } = useLanguage();
-  const story = useMemo(() => localizeStory(storyData, language), [storyData, language]);
+  const chosen = useProgress().progress.companion;
+  const story = useMemo(() => localizeStory(storyForCompanion(storyData, chosen), language), [storyData, chosen, language]);
   const school = story.setting === 'school' || story.setting === 'community';
   const bazaar = story.setting === 'bazaar';
   const peers = school || bazaar;
@@ -36,6 +39,7 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
   const { companion, sceneId, index, mode, scene, dialogue, pendingChoice, transitioning, revealing, count, advance, restart, choose, ready } = player;
   const speaker = dialogue.speaker === 'companion' ? companion : dialogue.speaker;
   const left = peers ? 'aarav' : 'dadi', right = peers ? 'aara' : companion;
+  const guest = scene.guest;
   const atStart = sceneId === (story.startScene ?? 'opening') && index === 0 && mode === 'dialogue';
   const showIntro = ready && introPending && atStart;
   const showConsequence = !!consequence && !transitioning && mode === 'dialogue';
@@ -61,6 +65,7 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
   const reflective = mode === 'narrative' || mode === 'science' || mode === 'perspective';
   const leftExpression = mode === 'end' ? 'reassuring' : reflective ? 'thinking' : pendingChoice ? story.scenes[pendingChoice.nextScene].dialogue[0]?.expression ?? 'thinking' : speaker === left ? dialogue.expression : dialogue.listener;
   const rightExpression = pendingChoice ? pendingChoice.companionExpression : mode === 'end' ? 'happy' : reflective ? 'thinking' : speaker === right ? dialogue.expression : dialogue.listener;
+  const guestExpression = mode === 'end' ? 'happy' : speaker === guest ? dialogue.expression : dialogue.listener;
   const step = scene.progress ?? (mode === 'choices' ? 1 : index === 0 ? 0 : 1);
   const context = story.context ? t(story.context) : school ? t('Between classes · School corridor') : en.context;
   return <main className="story-app">
@@ -70,16 +75,17 @@ export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) 
         {!peers && <fieldset className="companion-picker"><legend>{en.companion}</legend><RadioGroup disabled={!ready} value={companion} onValueChange={value => restartStory(value as Companion)} aria-label={en.companion} orientation="horizontal">{(['aara', 'aarav'] as Companion[]).map(c => <label key={c} className={companion === c ? 'companion-option active' : 'companion-option'}><RadioGroupItem value={c} aria-label={en[c]} /><span className={`companion-seed ${c}`}/>{en[c]}</label>)}</RadioGroup></fieldset>}
       </div>
       <div className="story-book">
-        <div className={`scene-stage ${peers ? 'school-stage' : ''} ${bazaar ? 'bazaar-stage' : ''} ${transitioning ? 'is-transitioning' : ''} ${mode === 'perspective' ? 'perspective-stage' : ''}`} data-view={scene.view}>{bazaar ? <img className="kitchen-background bazaar-background" src="/bazaar-background.png" alt="" aria-hidden="true"/> : school ? <SchoolBackground/> : <KitchenBackground/>}<div className="scene-caption"><Sun size={15}/>{context}</div><div className="scene-corner" aria-hidden="true">{peers ? t(scene.view === 'aarav' ? 'Aarav’s view' : 'Aara’s view') : `01 / ${story.world}`}</div>
+        <div className={`scene-stage ${peers ? 'school-stage' : ''} ${bazaar ? 'bazaar-stage' : ''} ${transitioning ? 'is-transitioning' : ''} ${mode === 'perspective' ? 'perspective-stage' : ''} ${guest ? 'has-guest' : ''}`} data-view={scene.view}>{bazaar ? <img className="kitchen-background bazaar-background" src="/bazaar-background.png" alt="" aria-hidden="true"/> : school ? <SchoolBackground/> : <KitchenBackground/>}<div className="scene-caption"><Sun size={15}/>{context}</div><div className="scene-corner" aria-hidden="true">{peers ? t(scene.view === 'aarav' ? 'Aarav’s view' : 'Aara’s view') : `01 / ${story.world}`}</div>
           <CharacterPosition position="left" character={left} expression={leftExpression} animation={revealing && talking && speaker === left ? 'talking' : transitioning ? 'react' : 'idle'} active={talking && speaker === left} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>
           <CharacterPosition position="right" character={right} expression={rightExpression} animation={revealing && talking && speaker === right ? 'talking' : transitioning ? 'react' : 'idle'} active={talking && speaker === right} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>
+          {guest && <CharacterPosition position="guest" character={guest} expression={guestExpression} animation={revealing && talking && speaker === guest ? 'talking' : 'idle'} active={talking && speaker === guest} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>}
           <span className="scene-note">{t('A story unfolds in the everyday.')}</span>
           <AnimatePresence>{showIntro && <SceneIntro key="intro" world={story.world} title={story.title} place={context} onDone={() => setIntroPending(false)}/>}</AnimatePresence>
         </div>
         <div className="story-interaction" ref={actionRef}><SkillGain gains={player.gains}/>
           <SceneTransition sceneKey={`${sceneId}-${mode}-${showConsequence}`}>
             {showConsequence && consequence && <ConsequenceCard choice={consequence} onContinue={() => setConsequence(null)}/>}
-            {mode === 'dialogue' && !showConsequence && <DialogueBox dialogue={dialogue} speaker={en[speaker]} count={count} onContinue={advance} focusKey={`${sceneId}-${index}`} side={speaker === left ? 'left' : 'right'} line={[index + 1, scene.dialogue.length]}/>}
+            {mode === 'dialogue' && !showConsequence && <DialogueBox dialogue={dialogue} speaker={en[speaker]} count={count} onContinue={advance} focusKey={`${sceneId}-${index}`} side={speaker === left ? 'left' : speaker === guest ? 'guest' : 'right'} line={[index + 1, scene.dialogue.length]}/>}
             {mode === 'choices' && <section className="choices-panel"><div className="choices-heading"><span className="eyebrow">{t('YOUR TURN')}</span><h2>{scene.choicePrompt ?? en.choose}</h2><p>{en.chooseHint}</p></div><div className="choices-list">{scene.choices?.map((choice, i) => <ChoiceButton key={choice.id} choice={choice} index={i} selected={transitioning ? pendingChoice?.id ?? null : null} disabled={transitioning || !ready} onSelect={() => pick(choice)}/>)}</div></section>}
             {mode === 'narrative' && <section className="story-narrative"><span className="eyebrow">{t('A MOMENT TO REFLECT')}</span><h2>{scene.narrative}</h2><button className="continue-button" onClick={advance}>{t(story.scenes[scene.nextScene ?? '']?.kind === 'science' ? 'Let’s check together' : 'Continue')}<ArrowRight size={17}/></button></section>}
             {mode === 'perspective' && <PerspectiveSwitch onContinue={advance}/>}

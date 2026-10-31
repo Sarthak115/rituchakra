@@ -53,10 +53,15 @@ export const theStain: Story = {
     ], 'reflection'),
     reflection: { ...scene('reflection', 'aarav', 3, [], 'science'), kind: 'narrative', narrative: 'Sometimes the same moment feels completely different depending on where you stand. Being an ally means helping without making someone feel embarrassed.' },
     science: { ...scene('science', 'aarav', 4, [], 'resolution'), kind: 'science', scienceCheck: {
-      belief: 'Period stains can happen unexpectedly.',
-      evidence: 'Menstruation is a normal biological process. A period may start unexpectedly or leak onto clothing, and a person may need practical support.',
+      // Wording mirrors UNFPA, UNICEF and WHO; see docs/health-evidence-register.md (claims ST-1 to ST-3).
+      belief: 'If I get a stain at school, I have to hide it and manage alone.',
+      evidence: 'Periods can vary, especially in the first few years, and can start suddenly. Carrying a pad in your school bag helps you, or a friend who needs one. Shame and fear of teasing can keep girls away from school, so quiet, kind help matters.',
       takeaway: 'Help with dignity. Never turn someone’s period into a joke.',
-      sources: [{ title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' }],
+      sources: [
+        { title: 'UNFPA: Menstruation and human rights – FAQ', url: 'https://www.unfpa.org/menstruationfaq' },
+        { title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' },
+        { title: 'WHO: Menstrual health fact sheet', url: 'https://www.who.int/news-room/fact-sheets/detail/menstrual-health' },
+      ],
     } },
     resolution: scene('resolution', 'aarav', 4, [
       line('stain-ending-aara', 'aara', 'I have what I need now. Thank you for giving me privacy and support.', 'relieved', 'relieved'),

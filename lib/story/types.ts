@@ -11,7 +11,9 @@ export type SkillValues = Record<Skill, number>;
 export type StoryMode = 'dialogue' | 'choices' | 'narrative' | 'science' | 'perspective' | 'end';
 // `cultureNote` keeps family, cultural or religious practice visibly separate from the medical fact.
 export interface ScienceCheckContent { belief: string; evidence: string; takeaway: string; cultureNote?: string; sources: { title: string; url: string }[]; }
-export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; choicePrompt?: string; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; }
-export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school' | 'bazaar' | 'community'; chapter?: string; subtitle?: string; context?: string; footerLabel?: string; stages?: string[]; reflection?: string; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>; }
+export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; choicePrompt?: string; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; guest?: CharacterId; }
+export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school' | 'bazaar' | 'community'; chapter?: string; subtitle?: string; context?: string; footerLabel?: string; stages?: string[]; reflection?: string; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>;
+  /** Scene overrides when the learner plays as a given companion (e.g. Aarav as Aara's brother in Ghar). */
+  companionScenes?: Partial<Record<Companion, Record<string, Partial<Scene>>>>; }
 export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; }
 
