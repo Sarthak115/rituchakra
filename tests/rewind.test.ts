@@ -41,3 +41,21 @@ test('Classroom view is a saved on/off setting and nothing else', async () => {
   assert.equal(parseProgress(JSON.stringify({ version: 1, classroom: 'yes' })).classroom, undefined);
   assert.equal(parseProgress(null).classroom, undefined);
 });
+
+test('Nagar: all 9 paths reach evidence, reflection and the end; every choice has a consequence', async () => {
+  const { theLongJourney } = await import('../data/stories/theLongJourney');
+  const { advanceStory } = await import('../lib/story/engine');
+  for (const first of ['tell-teacher', 'ask-friend', 'say-nothing']) for (const second of ['black-bag', 'no-secret', 'laugh-off']) {
+    let state = initialStoryState(theLongJourney);
+    const visited: string[] = [];
+    for (let i = 0; i < 80 && state.mode !== 'end'; i++) {
+      visited.push(state.sceneId);
+      state = state.mode === 'choices' ? selectChoice(theLongJourney, state, state.sceneId === 'opening' ? first : second) : advanceStory(theLongJourney, state);
+    }
+    assert.equal(state.mode, 'end', `${first}/${second}`);
+    for (const scene of ['roadside', 'switch', 'chemist', 'reflect', 'science', 'resolution']) assert.ok(visited.includes(scene), `${first}/${second} misses ${scene}`);
+    assert.ok(visited.indexOf('switch') < visited.indexOf('chemist'));
+  }
+  assert.ok(theLongJourney.reflection);
+  for (const scene of Object.values(theLongJourney.scenes)) for (const choice of scene.choices ?? []) assert.ok(choice.consequence, choice.id);
+});

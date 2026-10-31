@@ -15,7 +15,7 @@
 
 | Time | Do | Say (suggested) |
 |---|---|---|
-| 0:00 | Homepage: the island map. Aara greets you from her boat. Point to the five islands, from Ghar to Nagar (under a cloud: coming soon). | "RituChakra is a voyage through real period moments: home, school, the market, friends, and the city. Kids pick who sails with them." |
+| 0:00 | Homepage: the island map. Aara greets you from her boat. Point to the five islands, from Ghar to Nagar. | "RituChakra is a voyage through real period moments: home, school, the market, friends, and a trip to the city. Kids pick who sails with them." |
 | 0:10 | Tap the **Vidyalaya** island. The boat sails there, then the story opens with its title card and Aara speaks. | "Watch the characters: the speaker is highlighted, the listener reacts." |
 | 0:18 | Tap **Continue** through Aara's two lines. | |
 | 0:25 | Choose **"Ask a trusted friend for help."** The consequence card appears. Tap **See what happens**, then tap through 2 lines. | "Every choice shows its consequence, without shaming the learner." |
@@ -34,7 +34,7 @@
 
 | ✅ Say | ❌ Don't claim |
 |---|---|
-| Four stories are playable end to end, every branch tested. | That Classroom view has been tested in a real classroom (it is a working prototype), or that Offline Mode exists as a feature (the local build runs offline, but there is no offline install). |
+| Five stories are playable end to end, every branch tested. | That Classroom view has been tested in a real classroom (it is a working prototype), or that Offline Mode exists as a feature (the local build runs offline, but there is no offline install). |
 | Science Checks are sourced; see `docs/health-evidence-register.md`. | Measured learning gains (no evaluation yet). |
 | Hindi and Odia text is in place and **under native-speaker review**. | That the translations are validated, or that there is Hindi/Odia voice. |
 | It works on a shared classroom screen and on phones. | That RituReels is part of this demo (it is hidden). |

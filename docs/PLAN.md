@@ -85,3 +85,8 @@ Still open:
   - **Classroom view**: a header toggle; extra-large text; class vote with +/− tallies per choice, the leader highlighted, and the teacher clicking the winning choice. Counts are not stored. Prototype only; not yet tested with a real class.
   - **Sakhi Sabha park**: original SVG background, replacing the reused school corridor.
   - **Bazaar image**: compressed from 2 MB PNG to 83 KB WebP (157 KB JPEG fallback); the artwork is unchanged and the PNG is kept as the master.
+
+## Status (2 Nov 2026, later)
+
+- **Island voyage homepage** (`5ea16cf`): five islands, the companion sails to the island you tap, lanterns on completed islands, parallax, soft sounds with mute, a phone zigzag layout.
+- **Nagar: The Long Journey** built from the approved script (`docs/NAGAR_STORY.md`): new roadside-stop background, 3 × 3 branches, sourced Science Check (NG-1 to NG-4), HI/OR machine drafts. Nagar is no longer "Coming soon".

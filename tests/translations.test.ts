@@ -4,6 +4,7 @@ import { dadiKiRasoi } from '../data/stories/dadiKiRasoi';
 import { theStain } from '../data/stories/theStain';
 import { chooseWhatFits } from '../data/stories/chooseWhatFits';
 import { theJoke } from '../data/stories/theJoke';
+import { theLongJourney } from '../data/stories/theLongJourney';
 import { translations } from '../data/translations';
 import { storyForCompanion } from '../lib/story/engine';
 import type { Story } from '../lib/story/types';
@@ -23,7 +24,7 @@ function strings(story: Story) {
 
 test('all story text has Hindi and Odia for both Aara and Aarav', () => {
   const missing = new Set<string>();
-  for (const base of [dadiKiRasoi, theStain, chooseWhatFits, theJoke]) for (const companion of ['aara', 'aarav'] as const)
+  for (const base of [dadiKiRasoi, theStain, chooseWhatFits, theJoke, theLongJourney]) for (const companion of ['aara', 'aarav'] as const)
     for (const key of strings(storyForCompanion(base, companion))) if (!translations[key]?.[0] || !translations[key]?.[1]) missing.add(key);
   assert.deepEqual([...missing], []);
 });

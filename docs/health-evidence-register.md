@@ -56,6 +56,17 @@ The old "What we heard" line ("Period stains can happen unexpectedly") was a fac
 | BZ-3 | "...and whether you can wash, dry or dispose of it properly." | WHO-MH: education should "describe how to use and dispose of (or wash, dry and re-use) menstrual materials". UNICEF-GUIDE p.24: "Proper washing and drying is crucial for safe use". | ✅ Supported |
 | BZ-4 | "Used disposable pads go in a bin, never down the toilet." | UNICEF-HOME: "Place used disposable menstrual products properly in a waste bin and never down flushing toilets as it may block the toilet." | ✅ Supported |
 
+### Nagar: The Long Journey (`data/stories/theLongJourney.ts`, scene `science`)
+
+| ID | Exact wording shown | Source and passage | Status |
+|---|---|---|---|
+| NG-1 | "Periods can vary and can start suddenly, especially in the first few years." | UNFPA-FAQ: periods "can also change or vary, particularly in the first few years after menarche." UNICEF-HOME: "...so she's ready if her period suddenly starts..." | ✅ Supported |
+| NG-2 | "Carrying a pad and a small bag for used products helps when you are away from home." | UNICEF-HOME: carry "menstrual products in her school bag so she's ready if her period suddenly starts"; reusables carried home "in a bag to wash". | ✅ Supported |
+| NG-3 | "Everyone needs a clean, private place to change." | WHO-MH: people "may additionally lack access to safe, clean and private rooms in which they can change, wash and/or dry menstrual materials". | ✅ Supported |
+| NG-4 | "Used pads go in a bin, never down the toilet." | UNICEF-HOME: "Place used disposable menstrual products properly in a waste bin and never down flushing toilets as it may block the toilet." | ✅ Supported |
+
+Dialogue in this story makes no further health claims. It covers asking for help and buying products without shame, which are behaviours, not health facts.
+
 ## Health or product claims inside dialogue
 
 | ID | Story / line id | Exact wording | Source and passage | Status |
@@ -78,4 +89,5 @@ These are recorded so nobody re-enables them unchecked.
 | RR-2 | temple reel | "It does not make a person medically impure." | ⚠️ Reword before re-enabling. Sources frame impurity as a belief or myth (WHO-MH: "the myth that menstruation is inherently dirty or unclean"; UNFPA-FAQ: "Some communities believe women and girls can spread misfortune or impurity"). Suggested wording: "Menstrual blood has no special or dangerous properties. The idea that periods make someone dirty is a myth." |
 
 ## Change log
+- **2 Nov 2026:** Nagar (The Long Journey) added, claims NG-1 to NG-4, all reusing sources already verified.
 - **1 Nov 2026:** register created. GH, ST, JK and BZ Science Checks rewritten to match source wording. Bazaar cup and underwear lines reworded; one unsourced sentence removed.

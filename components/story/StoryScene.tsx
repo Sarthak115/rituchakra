@@ -9,6 +9,7 @@ import { localizeStory } from '@/data/translations';
 import { LanguageSelector } from '@/components/layout/LanguageSelector';
 import { SchoolBackground } from './SchoolBackground';
 import { ParkBackground } from './ParkBackground';
+import { NagarBackground } from './NagarBackground';
 import { PerspectiveSwitch } from './PerspectiveSwitch';
 import type { Choice, Companion, Story } from '@/lib/story/types';
 import { useStoryTool } from '@/lib/story/useStoryTool';
@@ -38,7 +39,7 @@ function StoryStage({ storyData }: { storyData: Story }) {
   // Class vote tallies for the current decision. Counts only; nothing is stored.
   const [votes, setVotes] = useState<Record<string, number>>({});
   const story = useMemo(() => localizeStory(storyForCompanion(storyData, chosen), language), [storyData, chosen, language]);
-  const school = story.setting === 'school' || story.setting === 'community';
+  const school = story.setting === 'school' || story.setting === 'community' || story.setting === 'city';
   const bazaar = story.setting === 'bazaar';
   const peers = school || bazaar;
   const [introPending, setIntroPending] = useState(true);
@@ -85,7 +86,7 @@ function StoryStage({ storyData }: { storyData: Story }) {
         {!peers && <fieldset className="companion-picker"><legend>{en.companion}</legend><RadioGroup disabled={!ready} value={companion} onValueChange={value => restartStory(value as Companion)} aria-label={en.companion} orientation="horizontal">{(['aara', 'aarav'] as Companion[]).map(c => <label key={c} className={companion === c ? 'companion-option active' : 'companion-option'}><RadioGroupItem value={c} aria-label={en[c]} /><span className={`companion-seed ${c}`}/>{en[c]}</label>)}</RadioGroup></fieldset>}
       </div>
       <div className="story-book">
-        <div className={`scene-stage ${peers ? 'school-stage' : ''} ${bazaar ? 'bazaar-stage' : ''} ${transitioning ? 'is-transitioning' : ''} ${mode === 'perspective' ? 'perspective-stage' : ''} ${guest ? 'has-guest' : ''}`} data-view={scene.view}>{bazaar ? <picture><source srcSet="/bazaar-background.webp" type="image/webp"/><img className="kitchen-background bazaar-background" src="/bazaar-background.jpg" alt="" aria-hidden="true"/></picture> : story.setting === 'community' ? <ParkBackground/> : school ? <SchoolBackground/> : <KitchenBackground/>}<div className="scene-caption"><Sun size={15}/>{context}</div><div className="scene-corner" aria-hidden="true">{peers ? t(scene.view === 'aarav' ? 'Aarav’s view' : 'Aara’s view') : `01 / ${story.world}`}</div>
+        <div className={`scene-stage ${peers ? 'school-stage' : ''} ${bazaar ? 'bazaar-stage' : ''} ${transitioning ? 'is-transitioning' : ''} ${mode === 'perspective' ? 'perspective-stage' : ''} ${guest ? 'has-guest' : ''}`} data-view={scene.view}>{bazaar ? <picture><source srcSet="/bazaar-background.webp" type="image/webp"/><img className="kitchen-background bazaar-background" src="/bazaar-background.jpg" alt="" aria-hidden="true"/></picture> : story.setting === 'community' ? <ParkBackground/> : story.setting === 'city' ? <NagarBackground/> : school ? <SchoolBackground/> : <KitchenBackground/>}<div className="scene-caption"><Sun size={15}/>{context}</div><div className="scene-corner" aria-hidden="true">{peers ? t(scene.view === 'aarav' ? 'Aarav’s view' : 'Aara’s view') : `01 / ${story.world}`}</div>
           <CharacterPosition position="left" character={left} expression={leftExpression} animation={revealing && talking && speaker === left ? 'talking' : transitioning ? 'react' : 'idle'} active={talking && speaker === left} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>
           <CharacterPosition position="right" character={right} expression={rightExpression} animation={revealing && talking && speaker === right ? 'talking' : transitioning ? 'react' : 'idle'} active={talking && speaker === right} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>
           {guest && <CharacterPosition position="guest" character={guest} expression={guestExpression} animation={revealing && talking && speaker === guest ? 'talking' : 'idle'} active={talking && speaker === guest} dialogueActive={talking} reactKey={`${sceneId}-${index}`}/>}

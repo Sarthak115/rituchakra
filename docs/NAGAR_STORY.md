@@ -1,6 +1,6 @@
 # Nagar · Chapter 05 · The Long Journey (script draft for approval)
 
-**Status:** draft. Nothing is built until you approve or edit this text.
+**Status:** approved by Sarthak Kumar on 2 Nov 2026 and built as `data/stories/theLongJourney.ts` (route `/nagar`).
 **World:** Nagar (Modern Life) · **Setting:** a school trip by bus to the city science museum, then a roadside stop with a chemist shop.
 **Learning objective:** a period can start away from home. Plan a little, ask for help in public without shame, and buy or share products as an everyday thing.
 **Characters:** Aara (the one with the period) and Aarav (classmate, ally). The teacher and a friend are mentioned, not shown. Aarav never menstruates.

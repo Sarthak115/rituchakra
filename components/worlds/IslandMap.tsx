@@ -15,7 +15,7 @@ export const islands: { name: string; theme: string; kind: IslandKind; path?: st
   { name: 'Vidyalaya', theme: 'School & Adolescence', kind: 'school', path: '/vidyalaya', storyId: 'vidyalaya-the-stain', wide: [33, 30], tall: [72, 29] },
   { name: 'Bazaar', theme: 'Products & Choices', kind: 'bazaar', path: '/bazaar', storyId: 'bazaar-choose-what-fits', wide: [51, 66], tall: [28, 48] },
   { name: 'Sakhi Sabha', theme: 'Allyship & Community', kind: 'sakhi', path: '/sakhi-sabha', storyId: 'sakhi-sabha-the-joke', wide: [69, 28], tall: [72, 67] },
-  { name: 'Nagar', theme: 'Modern Life', kind: 'nagar', wide: [87, 62], tall: [30, 86] },
+  { name: 'Nagar', theme: 'Modern Life', kind: 'nagar', path: '/nagar', storyId: 'nagar-the-long-journey', wide: [87, 62], tall: [30, 86] },
 ];
 
 function useNarrow() {

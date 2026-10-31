@@ -18,6 +18,7 @@ Statuses:
 | The Stain | Final | Existing + machine draft | Existing + machine draft | Consequences, Science Check, reflection |
 | Choose What Fits | Final | Existing + machine draft | Existing + machine draft | Consequences, Science Check, two product lines, reflection |
 | The Joke | Final | Existing + machine draft | Existing + machine draft | Consequences, Science Check, reflection |
+| The Long Journey (Nagar) | Final | Machine draft | Machine draft | Whole story is new |
 | UI: controls, cards, end screen | Final | Existing + machine draft | Existing + machine draft | Consequence card, reflection screen, culture note, source label |
 
 Automated check: `tests/translations.test.ts` fails if any learner-facing story string lacks HI or OR, for both the Aara and Aarav versions.
@@ -148,6 +149,55 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 | Which island shall we sail to? | चलो, किस द्वीप पर चलें? | ଚାଲ, କେଉଁ ଦ୍ୱୀପକୁ ଯିବା? | Machine draft | |
 | Sound on | आवाज़ चालू | ଶବ୍ଦ ଚାଲୁ | Machine draft | |
 | Sound off | आवाज़ बंद | ଶବ୍ଦ ବନ୍ଦ | Machine draft | |
+
+### Nagar – The Long Journey
+
+| English | Hindi | Odia | Status | Notes |
+|---|---|---|---|---|
+| The Long Journey | लंबा सफ़र | ଲମ୍ବା ଯାତ୍ରା | Machine draft | |
+| CHAPTER 05 | अध्याय ०५ | ଅଧ୍ୟାୟ ୦୫ | Machine draft | |
+| Periods don’t follow a timetable. | माहवारी किसी टाइम-टेबल से नहीं चलती। | ମାସିକ ଋତୁସ୍ରାବ କୌଣସି ସମୟସାରଣୀ ମାନେ ନାହିଁ। | Machine draft | |
+| School trip to the city · A roadside stop | शहर की स्कूल यात्रा · सड़क किनारे एक पड़ाव | ସହରକୁ ସ୍କୁଲ୍ ଭ୍ରମଣ · ରାସ୍ତା କଡ଼ର ଏକ ବିରତି | Machine draft | |
+| A JOURNEY TO THE CITY | शहर की ओर एक सफ़र | ସହର ଆଡ଼କୁ ଏକ ଯାତ୍ରା | Machine draft | |
+| Ask for help | मदद माँगें | ସାହାଯ୍ୟ ମାଗନ୍ତୁ | Machine draft | |
+| What will Aara do? | Aara क्या करेगी? | Aara କ’ଣ କରିବ? | Machine draft | |
+| What will Aarav do? | Aarav क्या करेगा? | Aarav କ’ଣ କରିବ? | Machine draft | |
+| Oh no. I think my period has started, and we’re still an hour from the city. | अरे नहीं। लगता है मेरी माहवारी शुरू हो गई है, और शहर अभी एक घंटा दूर है। | ଆରେ ନା। ମୋର ବୋଧେ ମାସିକ ଆରମ୍ଭ ହୋଇଗଲା, ଆଉ ସହର ଏବେ ବି ଏକ ଘଣ୍ଟା ଦୂର। | Machine draft | |
+| I didn’t pack anything. What if it leaks onto the seat? | मैंने कुछ भी साथ नहीं रखा। अगर सीट पर दाग लग गया तो? | ମୁଁ କିଛି ସାଙ୍ଗରେ ଆଣିନାହିଁ। ଯଦି ସିଟ୍‌ରେ ଦାଗ ଲାଗିଯାଏ? | Machine draft | |
+| Quietly tell the teacher at the front. | आगे बैठी टीचर को चुपचाप बताएँ। | ଆଗରେ ବସିଥିବା ଶିକ୍ଷୟିତ୍ରୀଙ୍କୁ ଚୁପଚାପ୍ କୁହନ୍ତୁ। | Machine draft | |
+| Ask a friend if she has a spare pad. | किसी सहेली से पूछें कि क्या उसके पास एक पैड है। | କୌଣସି ସାଙ୍ଗକୁ ପଚାରନ୍ତୁ ତା’ ପାଖରେ ଗୋଟିଏ ପ୍ୟାଡ୍ ଅଛି କି। | Machine draft | |
+| Say nothing and wait until the museum. | कुछ न कहें और संग्रहालय पहुँचने तक इंतज़ार करें। | କିଛି ନକହି ସଂଗ୍ରହାଳୟ ପହଞ୍ଚିବା ଯାଏ ଅପେକ୍ଷା କରନ୍ତୁ। | Machine draft | |
+| Teachers are there to help. A quiet word is enough. | टीचर मदद के लिए ही होते हैं। चुपचाप एक बात कह देना काफ़ी है। | ଶିକ୍ଷକମାନେ ସାହାଯ୍ୟ ପାଇଁ ଅଛନ୍ତି। ଚୁପଚାପ୍ ଗୋଟିଏ କଥା କହିଦେବା ଯଥେଷ୍ଟ। | Machine draft | |
+| Many people carry a spare pad. Asking for one is normal. | कई लोग एक अतिरिक्त पैड साथ रखते हैं। एक माँगना बिल्कुल सामान्य है। | ଅନେକେ ଗୋଟିଏ ଅତିରିକ୍ତ ପ୍ୟାଡ୍ ସାଙ୍ଗରେ ରଖନ୍ତି। ଗୋଟିଏ ମାଗିବା ସ୍ୱାଭାବିକ। | Machine draft | |
+| Waiting alone can feel worse. There is usually someone who can help. | अकेले इंतज़ार करना और मुश्किल लग सकता है। आमतौर पर कोई न कोई मदद कर सकता है। | ଏକା ଅପେକ୍ଷା କରିବା ଆହୁରି କଷ୍ଟକର ଲାଗିପାରେ। ସାଧାରଣତଃ କେହି ନା କେହି ସାହାଯ୍ୟ କରିପାରନ୍ତି। | Machine draft | |
+| Ma’am said we’ll stop at the next roadside stop, and nobody else needs to know. | Ma’am ने कहा कि हम अगले पड़ाव पर रुकेंगे, और किसी और को पता चलने की ज़रूरत नहीं। | Ma’am କହିଲେ ଆମେ ପରବର୍ତ୍ତୀ ବିରତିରେ ଅଟକିବା, ଆଉ ଅନ୍ୟ କାହାକୁ ଜଣାଇବା ଦରକାର ନାହିଁ। | Machine draft | |
+| That was easier than I thought. | यह मेरी सोच से कहीं आसान था। | ଏହା ମୁଁ ଭାବିଥିବାଠାରୁ ସହଜ ଥିଲା। | Machine draft | |
+| Meera gave me one pad from her bag. But it’s a long day, so I’ll need more. | Meera ने अपने बैग से मुझे एक पैड दिया। पर दिन लंबा है, तो मुझे और चाहिए होंगे। | Meera ତା’ ବ୍ୟାଗରୁ ମୋତେ ଗୋଟିଏ ପ୍ୟାଡ୍ ଦେଲା। କିନ୍ତୁ ଦିନଟି ଲମ୍ବା, ତେଣୁ ମୋତେ ଆହୁରି ଦରକାର ହେବ। | Machine draft | |
+| I’m glad I asked instead of worrying alone. | अच्छा हुआ कि अकेले परेशान होने की बजाय मैंने पूछ लिया। | ଭଲ ହେଲା ଯେ ଏକା ଚିନ୍ତା କରିବା ବଦଳରେ ମୁଁ ପଚାରିଲି। | Machine draft | |
+| I kept quiet, but I couldn’t stop worrying the whole way. | मैं चुप रही, पर पूरे रास्ते चिंता करती रही। | ମୁଁ ଚୁପ୍ ରହିଲି, କିନ୍ତୁ ପୂରା ବାଟ ଚିନ୍ତା କରୁଥିଲି। | Machine draft | |
+| At the next stop I told Ma’am. She helped right away. | अगले पड़ाव पर मैंने Ma’am को बताया। उन्होंने तुरंत मदद की। | ପରବର୍ତ୍ତୀ ବିରତିରେ ମୁଁ Ma’am ଙ୍କୁ କହିଲି। ସେ ତୁରନ୍ତ ସାହାଯ୍ୟ କଲେ। | Machine draft | |
+| The bus stopped near a chemist. Ma’am asked Aarav to buy a packet of pads while I use the restroom. | बस एक केमिस्ट की दुकान के पास रुकी। जब तक मैं शौचालय गई, Ma’am ने Aarav से पैड का एक पैकेट लाने को कहा। | ବସ୍ ଏକ ଔଷଧ ଦୋକାନ ପାଖରେ ଅଟକିଲା। ମୁଁ ଶୌଚାଳୟ ଯାଉଥିବା ବେଳେ Ma’am Aarav କୁ ଏକ ପ୍ୟାକେଟ୍ ପ୍ୟାଡ୍ କିଣିବାକୁ କହିଲେ। | Machine draft | |
+| Ma’am gave me money for pads. A few boys from our class are watching me at the counter. | Ma’am ने मुझे पैड के लिए पैसे दिए। हमारी कक्षा के कुछ लड़के मुझे काउंटर पर देख रहे हैं। | Ma’am ମୋତେ ପ୍ୟାଡ୍ ପାଇଁ ପଇସା ଦେଲେ। ଆମ କ୍ଲାସର କିଛି ପିଲା ମୋତେ କାଉଣ୍ଟରରେ ଦେଖୁଛନ୍ତି। | Machine draft | |
+| The shopkeeper is wrapping the packet in newspaper and a black bag, as if it’s a secret. | दुकानदार पैकेट को अख़बार और काली थैली में लपेट रहा है, जैसे यह कोई राज़ हो। | ଦୋକାନୀ ପ୍ୟାକେଟ୍‌କୁ ଖବରକାଗଜ ଓ କଳା ଥଳିରେ ଗୁଡ଼ାଉଛି, ଯେମିତି ଏହା କିଛି ଗୁପ୍ତ କଥା। | Machine draft | |
+| Take the black bag and hurry back. | काली थैली लेकर जल्दी से वापस जाएँ। | କଳା ଥଳି ନେଇ ଶୀଘ୍ର ଫେରିଆସନ୍ତୁ। | Machine draft | |
+| “No need to hide it, thank you,” and walk back. | “छिपाने की ज़रूरत नहीं, धन्यवाद,” कहकर वापस जाएँ। | “ଲୁଚାଇବା ଦରକାର ନାହିଁ, ଧନ୍ୟବାଦ,” କହି ଫେରିଆସନ୍ତୁ। | Machine draft | |
+| Laugh it off with the boys watching. | देख रहे लड़कों के साथ इसे हँसी में उड़ा दें। | ଦେଖୁଥିବା ପିଲାମାନଙ୍କ ସହ ଏହାକୁ ହସରେ ଉଡ଼ାଇଦିଅନ୍ତୁ। | Machine draft | |
+| Being discreet is fine, but buying pads is nothing to be ashamed of. | निजता रखना ठीक है, पर पैड खरीदने में शर्म की कोई बात नहीं। | ଗୋପନୀୟତା ରଖିବା ଠିକ୍, କିନ୍ତୁ ପ୍ୟାଡ୍ କିଣିବାରେ ଲଜ୍ଜାର କିଛି ନାହିଁ। | Machine draft | |
+| Treating pads as an everyday item helps make periods less of a secret. | पैड को रोज़ की आम चीज़ की तरह लेने से माहवारी कम छिपाने वाली बात बनती है। | ପ୍ୟାଡ୍‌କୁ ଦୈନନ୍ଦିନ ଜିନିଷ ଭଳି ଦେଖିଲେ ମାସିକ ଋତୁସ୍ରାବ କମ୍ ଗୁପ୍ତ ବିଷୟ ହୁଏ। | Machine draft | |
+| A joke can make it awkward for Aara later, even if no one means harm. | मज़ाक बाद में Aara के लिए अजीब स्थिति बना सकता है, भले ही किसी का इरादा बुरा न हो। | ଥଟ୍ଟା ପରେ Aara ପାଇଁ ଅସହଜ ସ୍ଥିତି ସୃଷ୍ଟି କରିପାରେ, ଯଦିଓ କାହାର ଖରାପ ଉଦ୍ଦେଶ୍ୟ ନଥାଏ। | Machine draft | |
+| I rushed back, feeling awkward for no reason. | मैं जल्दी-जल्दी लौटा, बेवजह अजीब महसूस करते हुए। | ମୁଁ ବିନା କାରଣରେ ଅସହଜ ଅନୁଭବ କରି ଶୀଘ୍ର ଫେରିଲି। | Machine draft | |
+| Next time I’ll just carry it like anything else from a shop. | अगली बार मैं इसे दुकान की किसी भी और चीज़ की तरह ले जाऊँगा। | ପରବର୍ତ୍ତୀ ଥର ମୁଁ ଏହାକୁ ଦୋକାନର ଅନ୍ୟ ଯେକୌଣସି ଜିନିଷ ଭଳି ନେଇଯିବି। | Machine draft | |
+| One of the boys asked what I bought. I said, ‘Pads, for someone who needs them.’ | एक लड़के ने पूछा कि मैंने क्या खरीदा। मैंने कहा, ‘पैड, किसी को ज़रूरत है।’ | ଜଣେ ପିଲା ପଚାରିଲା ମୁଁ କ’ଣ କିଣିଲି। ମୁଁ କହିଲି, ‘ପ୍ୟାଡ୍, ଯାହାର ଦରକାର ତା’ ପାଇଁ।’ | Machine draft | |
+| He just nodded. It wasn’t a big deal at all. | उसने बस सिर हिलाया। यह कोई बड़ी बात थी ही नहीं। | ସେ କେବଳ ମୁଣ୍ଡ ହଲାଇଲା। ଏହା କିଛି ବଡ଼ କଥା ନଥିଲା। | Machine draft | |
+| I joked about it, and the boys laughed all the way back to the bus. | मैंने इस पर मज़ाक किया, और लड़के बस तक हँसते रहे। | ମୁଁ ଏହାକୁ ନେଇ ଥଟ୍ଟା କଲି, ଆଉ ପିଲାମାନେ ବସ୍ ପର୍ଯ୍ୟନ୍ତ ହସୁଥିଲେ। | Machine draft | |
+| Then I saw Aara’s face. I stopped and said sorry. | फिर मैंने Aara का चेहरा देखा। मैं रुका और माफ़ी माँगी। | ତା’ପରେ ମୁଁ Aara ର ମୁହଁ ଦେଖିଲି। ମୁଁ ଅଟକିଲି ଓ କ୍ଷମା ମାଗିଲି। | Machine draft | |
+| Periods don’t follow a timetable. A little planning and a lot of kindness go a long way. | माहवारी किसी टाइम-टेबल से नहीं चलती। थोड़ी तैयारी और ढेर सारी दयालुता बहुत काम आती है। | ମାସିକ ଋତୁସ୍ରାବ କୌଣସି ସମୟସାରଣୀ ମାନେ ନାହିଁ। ଟିକିଏ ପ୍ରସ୍ତୁତି ଓ ଅନେକ ଦୟା ବହୁତ କାମରେ ଆସେ। | Machine draft | |
+| If my period starts while travelling, I have to manage on my own. | अगर सफ़र में माहवारी शुरू हो जाए, तो मुझे सब अकेले ही संभालना होगा। | ଯାତ୍ରା ସମୟରେ ମାସିକ ଆରମ୍ଭ ହେଲେ, ମୋତେ ସବୁ ଏକା ସମ୍ଭାଳିବାକୁ ପଡ଼ିବ। | Machine draft | |
+| Periods can vary and can start suddenly, especially in the first few years. Carrying a pad and a small bag for used products helps when you are away from home. Everyone needs a clean, private place to change. Used pads go in a bin, never down the toilet. | माहवारी अलग-अलग हो सकती है और अचानक शुरू हो सकती है, खासकर शुरुआती कुछ सालों में। घर से बाहर हों तो एक पैड और इस्तेमाल किए गए उत्पाद के लिए एक छोटी थैली साथ रखना मदद करता है। हर किसी को बदलने के लिए एक साफ़, निजी जगह चाहिए। इस्तेमाल किए गए पैड कूड़ेदान में डालें, शौचालय में कभी नहीं। | ମାସିକ ଋତୁସ୍ରାବ ଭିନ୍ନ ହୋଇପାରେ ଓ ହଠାତ୍ ଆରମ୍ଭ ହୋଇପାରେ, ବିଶେଷକରି ପ୍ରଥମ କିଛି ବର୍ଷରେ। ଘର ବାହାରେ ଥିଲେ ଗୋଟିଏ ପ୍ୟାଡ୍ ଓ ବ୍ୟବହୃତ ସାମଗ୍ରୀ ପାଇଁ ଏକ ଛୋଟ ଥଳି ସାଙ୍ଗରେ ରଖିବା ସାହାଯ୍ୟ କରେ। ପ୍ରତ୍ୟେକଙ୍କୁ ବଦଳାଇବା ପାଇଁ ଏକ ସଫା, ଘରୋଇ ସ୍ଥାନ ଦରକାର। ବ୍ୟବହୃତ ପ୍ୟାଡ୍ ଡଷ୍ଟବିନ୍‌ରେ ପକାନ୍ତୁ, ଶୌଚାଳୟରେ କେବେ ନୁହେଁ। | Machine draft | |
+| Plan a little. Ask for help. Never make it a secret or a joke. | थोड़ी तैयारी करें। मदद माँगें। इसे कभी राज़ या मज़ाक न बनाएँ। | ଟିକିଏ ପ୍ରସ୍ତୁତ ରୁହନ୍ତୁ। ସାହାଯ୍ୟ ମାଗନ୍ତୁ। ଏହାକୁ କେବେ ଗୁପ୍ତ କଥା ବା ଥଟ୍ଟା କରନ୍ତୁ ନାହିଁ। | Machine draft | |
+| Thank you, Aarav. Next time I’ll keep a small period kit in my bag. | शुक्रिया, Aarav। अगली बार मैं अपने बैग में एक छोटी पीरियड किट रखूँगी। | ଧନ୍ୟବାଦ, Aarav। ପରବର୍ତ୍ତୀ ଥର ମୁଁ ମୋ ବ୍ୟାଗରେ ଏକ ଛୋଟ ପିରିୟଡ୍ କିଟ୍ ରଖିବି। | Machine draft | |
+| And I’ll remember that buying pads is just like buying anything else. | और मैं याद रखूँगा कि पैड खरीदना किसी भी और चीज़ को खरीदने जैसा ही है। | ଆଉ ମୁଁ ମନେ ରଖିବି ଯେ ପ୍ୟାଡ୍ କିଣିବା ଅନ୍ୟ ଯେକୌଣସି ଜିନିଷ କିଣିବା ଭଳି। | Machine draft | |
+| What would you put in a small period kit for a trip, and who could you ask for help on the way? | सफ़र के लिए एक छोटी पीरियड किट में आप क्या रखेंगे, और रास्ते में किससे मदद माँग सकते हैं? | ଯାତ୍ରା ପାଇଁ ଏକ ଛୋଟ ପିରିୟଡ୍ କିଟ୍‌ରେ ଆପଣ କ’ଣ ରଖିବେ, ଆଉ ବାଟରେ କାହାକୁ ସାହାଯ୍ୟ ମାଗିପାରିବେ? | Machine draft | |
 
 ### Choose What Fits – shortened existing line (unsourced second sentence removed)
 
