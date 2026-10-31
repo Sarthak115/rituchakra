@@ -10,7 +10,7 @@ export const theJoke: Story = {
   stages: ['Notice', 'See their side', 'Respond', 'Evidence', 'Together'], reflection: 'What could you say next time a joke makes someone uncomfortable?', completionImpact: { gyaan: 2, badlav: 3 },
   scenes: {
     opening: scene('opening', 'aara', 0, [
-      line('group-joke', 'aara', 'I mentioned needing a pad. A classmate said, “Why so serious? Is it a period emergency?”', 'concerned'),
+      line('group-joke', 'aara', 'I mentioned needing a pad. A classmate said, ‘Why so serious? Is it a period emergency?’', 'concerned'),
       line('group-feeling', 'aara', 'Some friends laughed. I wish I could ask for what I need without becoming the joke.', 'concerned', 'concerned'),
     ], 'feeling'),
     feeling: { ...scene('feeling', 'aara', 0, [], 'switch'), kind: 'narrative', narrative: 'A joke can feel different when you’re the one being laughed at.' },

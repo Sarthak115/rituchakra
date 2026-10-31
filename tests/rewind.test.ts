@@ -34,3 +34,10 @@ test('every story choice in the demo stories has consequence text and every stor
     for (const scene of Object.values(story.scenes)) for (const choice of scene.choices ?? []) assert.ok(choice.consequence, `${story.id}/${choice.id}`);
   }
 });
+
+test('Classroom view is a saved on/off setting and nothing else', async () => {
+  const { parseProgress } = await import('../lib/story/progress');
+  assert.equal(parseProgress(JSON.stringify({ version: 1, classroom: true })).classroom, true);
+  assert.equal(parseProgress(JSON.stringify({ version: 1, classroom: 'yes' })).classroom, undefined);
+  assert.equal(parseProgress(null).classroom, undefined);
+});

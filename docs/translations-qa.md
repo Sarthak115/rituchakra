@@ -128,11 +128,28 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 | A menstrual cup can be reused for years. It takes learning, boiling it after each period, and comfort with insertion. | मेंस्ट्रुअल कप को सालों तक दोबारा इस्तेमाल किया जा सकता है। इसके लिए सीखना, हर माहवारी के बाद इसे उबालना, और इसे अंदर लगाने में सहज होना ज़रूरी है। | ମେନ୍‌ଷ୍ଟ୍ରୁଆଲ୍ କପ୍ ବର୍ଷ ବର୍ଷ ଧରି ପୁଣି ବ୍ୟବହାର କରାଯାଇପାରେ। ଏଥିପାଇଁ ଶିଖିବା, ପ୍ରତି ଋତୁସ୍ରାବ ପରେ ଏହାକୁ ଫୁଟାଇବା, ଏବଂ ଭିତରେ ଲଗାଇବାରେ ସହଜ ଅନୁଭବ କରିବା ଦରକାର। | Machine draft | |
 | Period underwear is made of absorbent fabric. It can suit some people, but comfort, availability and cost matter. | पीरियड अंडरवियर सोखने वाले कपड़े से बना होता है। यह कुछ लोगों के लिए ठीक हो सकता है, पर आराम, उपलब्धता और कीमत मायने रखते हैं। | ପିରିୟଡ୍ ଅଣ୍ଡରୱେର୍ ଶୋଷିବା ଭଳି କପଡ଼ାରେ ତିଆରି। ଏହା କିଛି ଲୋକଙ୍କ ପାଇଁ ଠିକ୍ ହୋଇପାରେ, କିନ୍ତୁ ଆରାମ, ଉପଲବ୍ଧତା ଓ ଦାମ୍ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ। | Machine draft | |
 
+### Classroom view
+
+| English | Hindi | Odia | Status | Notes |
+|---|---|---|---|---|
+| Classroom view | क्लासरूम व्यू | କ୍ଲାସରୁମ୍ ଭ୍ୟୁ | Machine draft | |
+| CLASS VOTE | कक्षा का मत | ଶ୍ରେଣୀର ମତ | Machine draft | |
+| Raise hands for each answer. Count the votes, then click the class’s choice. | हर जवाब के लिए हाथ उठवाएँ। वोट गिनें, फिर कक्षा का चुना हुआ जवाब दबाएँ। | ପ୍ରତ୍ୟେକ ଉତ୍ତର ପାଇଁ ହାତ ଟେକାନ୍ତୁ। ଭୋଟ୍ ଗଣନ୍ତୁ, ତା’ପରେ ଶ୍ରେଣୀର ବଛା ଉତ୍ତର ଦବାନ୍ତୁ। | Machine draft | |
+| Add a vote | एक वोट जोड़ें | ଗୋଟିଏ ଭୋଟ୍ ଯୋଡ଼ନ୍ତୁ | Machine draft | |
+| Remove a vote | एक वोट हटाएँ | ଗୋଟିଏ ଭୋଟ୍ କାଢ଼ନ୍ତୁ | Machine draft | |
+| votes | वोट | ଭୋଟ୍ | Machine draft | |
+
 ### Choose What Fits – shortened existing line (unsourced second sentence removed)
 
 | English | Hindi | Odia | Status | Notes |
 |---|---|---|---|---|
 | A disposable pad could be practical if I already feel comfortable using it. | अगर मुझे इसे इस्तेमाल करना पहले से सहज लगता है, तो एक बार इस्तेमाल वाला पैड सुविधाजनक हो सकता है। | ଯଦି ଏହା ବ୍ୟବହାର କରିବାରେ ମୁଁ ଆଗରୁ ସହଜ ଅନୁଭବ କରେ, ତେବେ ଥରେ ବ୍ୟବହାର କରି ଫିଙ୍ଗାଯାଉଥିବା ପ୍ୟାଡ୍ ସୁବିଧାଜନକ ହୋଇପାରେ। | Machine draft | |
+
+## Existing text flagged during the upgrade
+
+| English | Issue | Status |
+|---|---|---|
+| I mentioned needing a pad. A classmate said, ‘Why so serious? Is it a period emergency?’ | HI says एक दोस्त ("a friend") but EN says "a classmate"; OR says ସହପାଠୀ (classmate). Inner quotes changed to ‘ ’ in all languages. | Needs review |
 
 ## Review checklist
 

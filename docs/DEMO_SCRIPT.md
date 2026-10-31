@@ -26,13 +26,15 @@
 | 1:22 | Click **Try another choice**: it jumps back to Aarav's decision. | "Learners can go back and try another path." |
 | 1:27 | Switch the language to **ଓଡ଼ିଆ** (or **हिन्दी**) on the same screen. | "Everything is available in Hindi and Odia, for a pan-India start in Odisha." |
 
+**If the judges ask about schools without phones (or you have 20 more seconds):** click **Classroom view** (top right). Text becomes extra-large and each choice gets a vote counter. Say: "In the government school, students couldn't bring phones. The teacher runs one shared screen, the class raises hands, the teacher counts with + and −, and clicks the winning answer. No accounts, nothing stored." Turn it off again before continuing.
+
 **If you have 20 more seconds:** open **Ghar**, set the companion to **Aarav**. Dadi asks Aarav to tell his sister Aara to stay out of the kitchen; Aarav asks why, respectfully. "Boys learn too, without ever being told they menstruate."
 
 ## What to say (and not say) about status
 
 | ✅ Say | ❌ Don't claim |
 |---|---|
-| Four stories are playable end to end, every branch tested. | Classroom Mode or Offline Mode are finished (not built yet). |
+| Four stories are playable end to end, every branch tested. | That Classroom view has been tested in a real classroom (it is a working prototype), or that Offline Mode exists as a feature (the local build runs offline, but there is no offline install). |
 | Science Checks are sourced; see `docs/health-evidence-register.md`. | Measured learning gains (no evaluation yet). |
 | Hindi and Odia text is in place and **under native-speaker review**. | That the translations are validated, or that there is Hindi/Odia voice. |
 | It works on a shared classroom screen and on phones. | That RituReels is part of this demo (it is hidden). |

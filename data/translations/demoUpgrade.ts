@@ -60,4 +60,11 @@ export const demoUpgradeCopy: Record<string, [string, string]> = {
   // Choose What Fits – product lines re-worded to match the UNICEF guide
   'A menstrual cup can be reused for years. It takes learning, boiling it after each period, and comfort with insertion.': ['मेंस्ट्रुअल कप को सालों तक दोबारा इस्तेमाल किया जा सकता है। इसके लिए सीखना, हर माहवारी के बाद इसे उबालना, और इसे अंदर लगाने में सहज होना ज़रूरी है।', 'ମେନ୍‌ଷ୍ଟ୍ରୁଆଲ୍ କପ୍ ବର୍ଷ ବର୍ଷ ଧରି ପୁଣି ବ୍ୟବହାର କରାଯାଇପାରେ। ଏଥିପାଇଁ ଶିଖିବା, ପ୍ରତି ଋତୁସ୍ରାବ ପରେ ଏହାକୁ ଫୁଟାଇବା, ଏବଂ ଭିତରେ ଲଗାଇବାରେ ସହଜ ଅନୁଭବ କରିବା ଦରକାର।'],
   'Period underwear is made of absorbent fabric. It can suit some people, but comfort, availability and cost matter.': ['पीरियड अंडरवियर सोखने वाले कपड़े से बना होता है। यह कुछ लोगों के लिए ठीक हो सकता है, पर आराम, उपलब्धता और कीमत मायने रखते हैं।', 'ପିରିୟଡ୍ ଅଣ୍ଡରୱେର୍ ଶୋଷିବା ଭଳି କପଡ଼ାରେ ତିଆରି। ଏହା କିଛି ଲୋକଙ୍କ ପାଇଁ ଠିକ୍ ହୋଇପାରେ, କିନ୍ତୁ ଆରାମ, ଉପଲବ୍ଧତା ଓ ଦାମ୍ ଗୁରୁତ୍ୱପୂର୍ଣ୍ଣ।'],
+  // Classroom view
+  'Classroom view': ['क्लासरूम व्यू', 'କ୍ଲାସରୁମ୍ ଭ୍ୟୁ'],
+  'CLASS VOTE': ['कक्षा का मत', 'ଶ୍ରେଣୀର ମତ'],
+  'Raise hands for each answer. Count the votes, then click the class’s choice.': ['हर जवाब के लिए हाथ उठवाएँ। वोट गिनें, फिर कक्षा का चुना हुआ जवाब दबाएँ।', 'ପ୍ରତ୍ୟେକ ଉତ୍ତର ପାଇଁ ହାତ ଟେକାନ୍ତୁ। ଭୋଟ୍ ଗଣନ୍ତୁ, ତା’ପରେ ଶ୍ରେଣୀର ବଛା ଉତ୍ତର ଦବାନ୍ତୁ।'],
+  'Add a vote': ['एक वोट जोड़ें', 'ଗୋଟିଏ ଭୋଟ୍ ଯୋଡ଼ନ୍ତୁ'],
+  'Remove a vote': ['एक वोट हटाएँ', 'ଗୋଟିଏ ଭୋଟ୍ କାଢ଼ନ୍ତୁ'],
+  'votes': ['वोट', 'ଭୋଟ୍'],
 };

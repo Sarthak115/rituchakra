@@ -89,3 +89,14 @@ html:lang(hi) body{font-family:'Noto Sans Devanagari','Nirmala UI',Arial,sans-se
 @media(min-width:801px) and (max-height:860px){.position-guest{height:calc(92% - 46px);width:auto;aspect-ratio:255/367}}
 @media(max-width:800px){.position-guest{right:3%;height:290px;width:200px}.has-guest .position-left{left:2%}.has-guest .position-right{right:34%}}
 @media(max-width:520px){.has-guest .character-position{height:205px;width:142px;bottom:20px}.has-guest .position-left{left:0}.has-guest .position-right{right:31%;left:auto}.has-guest .position-guest{right:0}}
+/* Classroom view: one shared screen, read from the back of the room; the teacher records the class vote. */
+.classroom-toggle[aria-pressed=true]{background:var(--teal);color:#fff9ec;border-color:var(--teal)}
+.classroom-mode .story-shell{max-width:1280px}.classroom-mode .dialogue-quote{font-size:34px;line-height:1.35}.classroom-mode .dialogue-bottom>span{visibility:hidden}.classroom-mode .speaker-label{font-size:15px}
+.classroom-mode .choices-panel{grid-template-columns:1fr 2.1fr;gap:24px}.classroom-mode .choices-heading h2{font-size:30px}.classroom-mode .choices-heading p{font-size:16px}.classroom-mode .choice-button strong{font-size:21px}.classroom-mode .choice-number{font-size:22px}
+.classroom-mode .story-narrative h2,.classroom-mode .consequence-card h2{font-size:31px}.classroom-mode .reflection-card h2{font-size:34px}.classroom-mode .science-cards p{font-size:19px}.classroom-mode .science-heard p,.classroom-mode .science-remember p{font-size:22px}.classroom-mode .science-culture p{font-size:18px}
+.vote-row{display:flex;gap:10px;align-items:stretch}.vote-row .choice-button{flex:1;min-width:0}
+.vote-tally{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:9px;padding:4px 8px;background:#fffaf0}
+.vote-tally button{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--teal)}.vote-tally button:disabled{opacity:.35}
+.vote-tally output{min-width:36px;text-align:center;font:600 26px Georgia,serif;color:var(--ink)}
+.vote-leader .choice-button{border-color:var(--teal);box-shadow:0 0 0 3px #3060524d;background:#eef2e6}
+@media(max-width:800px){.classroom-toggle span{display:none}.classroom-mode .dialogue-quote{font-size:26px}.classroom-mode .choices-panel{grid-template-columns:1fr}.classroom-mode .choice-button strong{font-size:17px}.vote-tally{padding:3px 5px;gap:3px}.vote-tally button{width:34px;height:34px}.vote-tally output{min-width:26px;font-size:21px}}

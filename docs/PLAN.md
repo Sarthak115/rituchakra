@@ -81,4 +81,7 @@ Still open:
 - Native review of 53 HI/OR strings (`docs/translations-qa.md`).
 - A human health reviewer to countersign `docs/health-evidence-register.md`.
 - Reduced-motion check on a real device. The code disables loops and makes expression changes instant, but this browser setup could not emulate the setting.
-- P1 items (Classroom view, market/park backgrounds) are not started.
+- P1 items, done 2 Nov 2026:
+  - **Classroom view**: a header toggle; extra-large text; class vote with +/− tallies per choice, the leader highlighted, and the teacher clicking the winning choice. Counts are not stored. Prototype only; not yet tested with a real class.
+  - **Sakhi Sabha park**: original SVG background, replacing the reused school corridor.
+  - **Bazaar image**: compressed from 2 MB PNG to 83 KB WebP (157 KB JPEG fallback); the artwork is unchanged and the PNG is kept as the master.
