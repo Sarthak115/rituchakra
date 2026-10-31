@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { theStain } from '../data/stories/theStain';
 import { dadiKiRasoi } from '../data/stories/dadiKiRasoi';
 import { initialStoryState, advanceStory, selectChoice, restoreStoryState } from '../lib/story/engine';
-import { emptyProgress, parseProgress, recordTransition, type LearnerProgress } from '../lib/story/progress';
+import { emptyProgress, parseProgress, recordTransition } from '../lib/story/progress';
 import { localizeStory, translations, type Language } from '../data/translations';
 
 for (const first of ['ask-friend', 'leave-quietly', 'ask-teacher']) for (const second of ['make-joke', 'ignore', 'offer-help']) {

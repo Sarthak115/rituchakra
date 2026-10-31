@@ -60,3 +60,25 @@ RituReels changes (hidden only); offline mode; AI or free-text responses; selfie
 - **New HI/OR text is unreviewed until you check it.** The QA list makes this explicit.
 - **Source pages can change or block fetching.** Any claim I cannot verify is flagged, not invented.
 - **vinext and nitro are betas.** Pinning plus a fixed lockfile keeps demo-day rebuilds identical. I will ask before any deploy.
+
+---
+
+## Status (2 Nov 2026)
+
+| Phase | Result | Commit |
+|---|---|---|
+| 0–1 Audit and plan | Done | `8c78c5e` |
+| 2 Character system | Done: Motion rig, 8 expressions, idle/talk/listen animation, speaker vs listener staging | `1d64fa2` |
+| 3 Story experience | Done: projector layout, title card, consequence cards, Science Check reveal, reflection + Try another choice. **Auto-play was built, then removed at your request**; dialogue is tap-to-continue again | `75014f9`, `4b75be4` |
+| 4 Demo path content | Done: Ghar Aarav mode (Aara as his sister), sourced Science Checks, evidence register, translations QA list, bundled HI/OR fonts | `2e10a17` |
+| 5 Ship safely | Lint passes (0 errors), lockfile in sync, betas pinned, Vercel build passes locally, production build tested, demo script written. **Not pushed or deployed.** | this phase |
+
+Decisions changed during the work:
+- **Auto-play:** removed (it felt odd); manual tap-to-continue restored.
+- **`next/link`:** not used. vinext 1.0.0-beta.5's client navigation throws in production builds, so links stay plain `<a>` (full page loads). The lint rule is off, with the reason in `eslint.config.mjs`.
+
+Still open:
+- Native review of 53 HI/OR strings (`docs/translations-qa.md`).
+- A human health reviewer to countersign `docs/health-evidence-register.md`.
+- Reduced-motion check on a real device. The code disables loops and makes expression changes instant, but this browser setup could not emulate the setting.
+- P1 items (Classroom view, market/park backgrounds) are not started.

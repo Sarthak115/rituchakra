@@ -26,7 +26,12 @@ import { ScienceCheck } from '@/components/science/ScienceCheck';
 import { StoryCompletion } from './StoryCompletion';
 import { SkillGain } from './SkillGain';
 
+// Keyed by story so client-side navigation between worlds starts each story with fresh UI state.
 export function StoryScene({ storyData = defaultStory }: { storyData?: Story }) {
+  return <StoryStage key={storyData.id} storyData={storyData}/>;
+}
+
+function StoryStage({ storyData }: { storyData: Story }) {
   const { language, t, copy: en } = useLanguage();
   const chosen = useProgress().progress.companion;
   const story = useMemo(() => localizeStory(storyForCompanion(storyData, chosen), language), [storyData, chosen, language]);
