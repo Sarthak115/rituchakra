@@ -18,7 +18,10 @@ export interface CharacterProps {
 }
 
 const names: Record<CharacterId, string> = { aara: 'Aara', aarav: 'Aarav', dadi: 'Dadi' };
-const origin = (x: number, y: number) => ({ originX: `${x}px`, originY: `${y}px` });
+// Pivot points are in the character's 250×410 drawing coordinates. Motion defaults SVG parts to
+// transform-box: fill-box, which would measure them from each part's own corner instead: blinks
+// then collapse the eyes toward a point near the chin, and the head swings from the wrong spot.
+const origin = (x: number, y: number) => ({ originX: `${x}px`, originY: `${y}px`, transformBox: 'view-box' as const });
 const loop = (duration: number): Transition => ({ duration, repeat: Infinity, ease: 'easeInOut' });
 
 export function Character({ character, expression = 'neutral', animation = 'idle', className = '', facing = 1, listening = false, reactKey = '' }: CharacterProps) {
