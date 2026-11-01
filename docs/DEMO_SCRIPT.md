@@ -26,6 +26,8 @@
 | 1:22 | Click **Try another choice**: it jumps back to Aarav's decision. | "Learners can go back and try another path." |
 | 1:27 | Switch the language to **ଓଡ଼ିଆ** (or **हिन्दी**) on the same screen. | "Everything is available in Hindi and Odia, for a pan-India start in Odisha." |
 
+**If judges ask why you choose a character:** go back to the map, pick **Aarav**, and open Vidyalaya again. The Stain now starts from Aarav's side: he notices, chooses how to react, then "Step into Aara's view". Say: "Who you sail with decides whose eyes you see the moment through first, and everyone sees both sides. Aarav learns as an ally; he is never told he has a period."
+
 **If the judges ask about schools without phones (or you have 20 more seconds):** click **Classroom view** (top right). Text becomes extra-large and each choice gets a vote counter. Say: "In the government school, students couldn't bring phones. The teacher runs one shared screen, the class raises hands, the teacher counts with + and −, and clicks the winning answer. No accounts, nothing stored." Turn it off again before continuing.
 
 **If you have 20 more seconds:** open **Ghar**, set the companion to **Aarav**. Dadi asks Aarav to tell his sister Aara to stay out of the kitchen; Aarav asks why, respectfully. "Boys learn too, without ever being told they menstruate."

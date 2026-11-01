@@ -14,6 +14,8 @@ export interface ScienceCheckContent { belief: string; evidence: string; takeawa
 export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; choicePrompt?: string; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; guest?: CharacterId; }
 export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school' | 'bazaar' | 'community' | 'city'; chapter?: string; subtitle?: string; context?: string; footerLabel?: string; stages?: string[]; reflection?: string; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>;
   /** Scene overrides when the learner plays as a given companion (e.g. Aarav as Aara's brother in Ghar). */
-  companionScenes?: Partial<Record<Companion, Record<string, Partial<Scene>>>>; }
-export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; }
+  companionScenes?: Partial<Record<Companion, Record<string, Partial<Scene>>>>;
+  companionStart?: Partial<Record<Companion, string>>; }
+// `companion` tags a saved checkpoint, so switching companion never resumes the other version's path.
+export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; companion?: Companion; }
 

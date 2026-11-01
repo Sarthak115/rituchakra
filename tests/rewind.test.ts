@@ -59,3 +59,23 @@ test('Nagar: all 9 paths reach evidence, reflection and the end; every choice ha
   assert.ok(theLongJourney.reflection);
   for (const scene of Object.values(theLongJourney.scenes)) for (const choice of scene.choices ?? []) assert.ok(choice.consequence, choice.id);
 });
+
+test('The Stain as Aarav: his view first, then Aara’s; all 9 paths end well and rewind works', async () => {
+  const { storyForCompanion, advanceStory } = await import('../lib/story/engine');
+  const aarav = storyForCompanion(theStain, 'aarav');
+  assert.equal(initialStoryState(aarav).sceneId, 'v-opening');
+  assert.equal(initialStoryState(storyForCompanion(theStain, 'aara')).sceneId, 'opening');
+  for (const first of ['v-make-joke', 'v-ignore', 'v-offer-help']) for (const second of ['v-ask-friend', 'v-leave-quietly', 'v-ask-teacher']) {
+    let state = initialStoryState(aarav);
+    const views: string[] = [];
+    for (let i = 0; i < 80 && state.mode !== 'end'; i++) {
+      const view = aarav.scenes[state.sceneId].view; if (view && views.at(-1) !== view) views.push(view);
+      state = state.mode === 'choices' ? selectChoice(aarav, state, state.sceneId === 'v-opening' ? first : second) : advanceStory(aarav, state);
+    }
+    assert.equal(state.mode, 'end', `${first}/${second}`);
+    assert.deepEqual(views.slice(0, 2), ['aarav', 'aara']);
+    const back = rewindToLastChoice(aarav, state)!;
+    assert.equal(back.sceneId, 'v-aara');
+    assert.deepEqual(restoreStoryState(aarav, back), back);
+  }
+});

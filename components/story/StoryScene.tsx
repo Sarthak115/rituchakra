@@ -105,7 +105,7 @@ function StoryStage({ storyData }: { storyData: Story }) {
               return <div key={choice.id} className={`vote-row ${count > 0 && count === topVote ? 'vote-leader' : ''}`}>{button}<div className="vote-tally"><button onClick={() => vote(choice.id, -1)} disabled={!count} aria-label={`${t('Remove a vote')}: ${choice.text}`}><Minus size={18}/></button><output aria-live="polite" aria-label={`${count} ${t('votes')}`}>{count}</output><button onClick={() => vote(choice.id, 1)} aria-label={`${t('Add a vote')}: ${choice.text}`}><Plus size={18}/></button></div></div>;
             })}<SpeakPreview/></div></section>}
             {mode === 'narrative' && <section className="story-narrative"><span className="eyebrow">{t('A MOMENT TO REFLECT')}</span><h2>{scene.narrative}</h2><button className="continue-button" onClick={advance}>{t(story.scenes[scene.nextScene ?? '']?.kind === 'science' ? 'Let’s check together' : 'Continue')}<ArrowRight size={17}/></button></section>}
-            {mode === 'perspective' && <PerspectiveSwitch onContinue={advance}/>}
+            {mode === 'perspective' && <PerspectiveSwitch onContinue={advance} to={story.scenes[scene.nextScene ?? '']?.view ?? 'aarav'}/>}
             {mode === 'science' && scene.scienceCheck && <ScienceCheck content={scene.scienceCheck} experienced={school} onContinue={advance}/>}
             {mode === 'end' && <StoryCompletion story={story} values={player.skills} onReplay={() => restartStory()} onRewind={player.canRewind ? rewind : undefined}/>}
           </SceneTransition>

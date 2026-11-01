@@ -128,4 +128,7 @@ export const demoUpgradeCopy: Record<string, [string, string]> = {
   'The story continues from what you said.': ['कहानी आपकी कही बात से आगे बढ़ती है।', 'ଆପଣ କହିଥିବା କଥାରୁ କାହାଣୀ ଆଗକୁ ବଢ଼େ।'],
   'This preview does not use the microphone. Nothing is recorded or stored.': ['यह झलक माइक्रोफ़ोन का इस्तेमाल नहीं करती। कुछ भी रिकॉर्ड या सेव नहीं होता।', 'ଏହି ଝଲକ ମାଇକ୍ରୋଫୋନ୍ ବ୍ୟବହାର କରେ ନାହିଁ। କିଛି ରେକର୍ଡ ବା ସେଭ୍ ହୁଏ ନାହିଁ।'],
   'Back to the choices': ['विकल्पों पर वापस', 'ବିକଳ୍ପକୁ ଫେରନ୍ତୁ'],
+  // The Stain – Aarav's view first
+  'Thank you for asking quietly. Give me a moment to think.': ['चुपचाप पूछने के लिए शुक्रिया। मुझे थोड़ा सोचने दो।', 'ଚୁପଚାପ୍ ପଚାରିଥିବାରୁ ଧନ୍ୟବାଦ। ମୋତେ ଟିକିଏ ଭାବିବାକୁ ଦିଅ।'],
+  'Step into Aara’s view': ['Aara की नज़र से देखें', 'Aaraଙ୍କ ଦୃଷ୍ଟିରୁ ଦେଖନ୍ତୁ'],
 };

@@ -70,3 +70,22 @@ export const theStain: Story = {
     complete: { ...scene('complete', 'aarav', 5, []), kind: 'end' },
   },
 };
+
+// Playing as Aarav: the same moment, seen from his side first. He notices and chooses how to react;
+// then "See their side" moves to Aara, who decides what she needs. Lines are reused from the
+// approved Aara-first version wherever they fit, so wording and translations stay reviewed.
+const base = theStain.scenes;
+const reuse = (sceneId: string, ...ids: string[]) => ids.map(id => base[sceneId].dialogue.find(item => item.id === id)!);
+const again = (sceneId: string, id: string, nextScene: string) => ({ ...base[sceneId].choices!.find(item => item.id === id)!, id: `v-${id}`, nextScene });
+theStain.companionStart = { aarav: 'v-opening' };
+theStain.companionScenes = { aarav: {
+  'v-opening': { view: 'aarav', progress: 0, dialogue: reuse('aarav-opening', 'aarav-notices', 'aarav-choice'), choices: [again('aarav-opening', 'make-joke', 'v-joke'), again('aarav-opening', 'ignore', 'v-ignore'), again('aarav-opening', 'offer-help', 'v-help')] },
+  'v-joke': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: reuse('joke', 'joke-hurts', 'joke-repair') },
+  'v-ignore': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: reuse('ignore-reaction', 'ignored', 'ignore-reconsider', 'ignore-offer') },
+  'v-help': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: [...reuse('help', 'help-offer'), line('help-moment', 'aara', 'Thank you for asking quietly. Give me a moment to think.', 'reassuring', 'reassuring')] },
+  'v-switch': { view: 'aarav', progress: 2, kind: 'perspective', nextScene: 'v-aara' },
+  'v-aara': { view: 'aara', progress: 2, dialogue: reuse('opening', 'stain-noticed', 'stain-worry'), choices: [again('opening', 'ask-friend', 'v-friend'), again('opening', 'leave-quietly', 'v-quiet'), again('opening', 'ask-teacher', 'v-teacher')] },
+  'v-friend': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['friend-help'].dialogue },
+  'v-quiet': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['quiet-exit'].dialogue },
+  'v-teacher': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['teacher-help'].dialogue },
+} };

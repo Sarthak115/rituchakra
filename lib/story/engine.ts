@@ -1,10 +1,14 @@
 import type { Choice, Companion, Story, StoryState } from './types';
 
-// The version of a story the chosen companion plays. Choice ids stay the same, so saves and rewards carry over.
+// The version of a story the chosen companion plays: overrides patch existing scenes, new ids add
+// scenes, and `companionStart` can open the story from a different scene (e.g. Aarav's view first).
 export function storyForCompanion(story: Story, companion: Companion): Story {
   const overrides = story.companionScenes?.[companion];
-  if (!overrides) return story;
-  return { ...story, scenes: Object.fromEntries(Object.entries(story.scenes).map(([id, scene]) => [id, overrides[id] ? { ...scene, ...overrides[id] } : scene])) };
+  const start = story.companionStart?.[companion];
+  if (!overrides && !start) return story;
+  const scenes = Object.fromEntries(Object.entries(story.scenes).map(([id, scene]) => [id, overrides?.[id] ? { ...scene, ...overrides[id] } : scene]));
+  for (const [id, scene] of Object.entries(overrides ?? {})) if (!story.scenes[id]) scenes[id] = { id, dialogue: [], ...scene };
+  return { ...story, startScene: start ?? story.startScene, scenes };
 }
 export function enterScene(story: Story, sceneId: string, choiceId: string | null = null, choiceIds: string[] = []): StoryState {
   const scene = story.scenes[sceneId];

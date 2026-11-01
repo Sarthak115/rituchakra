@@ -213,6 +213,13 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 | This preview does not use the microphone. Nothing is recorded or stored. | यह झलक माइक्रोफ़ोन का इस्तेमाल नहीं करती। कुछ भी रिकॉर्ड या सेव नहीं होता। | ଏହି ଝଲକ ମାଇକ୍ରୋଫୋନ୍ ବ୍ୟବହାର କରେ ନାହିଁ। କିଛି ରେକର୍ଡ ବା ସେଭ୍ ହୁଏ ନାହିଁ। | Machine draft | |
 | Back to the choices | विकल्पों पर वापस | ବିକଳ୍ପକୁ ଫେରନ୍ତୁ | Machine draft | |
 
+### The Stain – Aarav's view first
+
+| English | Hindi | Odia | Status | Notes |
+|---|---|---|---|---|
+| Thank you for asking quietly. Give me a moment to think. | चुपचाप पूछने के लिए शुक्रिया। मुझे थोड़ा सोचने दो। | ଚୁପଚାପ୍ ପଚାରିଥିବାରୁ ଧନ୍ୟବାଦ। ମୋତେ ଟିକିଏ ଭାବିବାକୁ ଦିଅ। | Machine draft | |
+| Step into Aara’s view | Aara की नज़र से देखें | Aaraଙ୍କ ଦୃଷ୍ଟିରୁ ଦେଖନ୍ତୁ | Machine draft | |
+
 ### Choose What Fits – shortened existing line (unsourced second sentence removed)
 
 | English | Hindi | Odia | Status | Notes |

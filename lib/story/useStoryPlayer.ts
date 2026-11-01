@@ -7,7 +7,9 @@ import { updateProgress, useProgress } from './useProgress';
 
 export function useStoryPlayer(story: Story, options?: { instantCaptions?: boolean; hold?: boolean }) {
   const { progress, ready, storageUnavailable } = useProgress();
-  const state = restoreStoryState(story, progress.stories[story.id]?.checkpoint);
+  // A checkpoint saved while playing as the other companion belongs to the other version: start fresh.
+  const saved = progress.stories[story.id]?.checkpoint;
+  const state = restoreStoryState(story, saved?.companion && saved.companion !== progress.companion ? null : saved);
   const { sceneId, index, mode } = state;
   const scene = story.scenes[sceneId];
   const dialogue = scene.dialogue[index] ?? story.scenes[story.startScene ?? 'opening'].dialogue.at(-1)!;
@@ -43,7 +45,7 @@ export function useStoryPlayer(story: Story, options?: { instantCaptions?: boole
   function commit(next: StoryState) {
     let earned = emptySkills();
     updateProgress(current => {
-      const saved = recordTransition(current, story, state, next);
+      const saved = recordTransition(current, story, state, { ...next, companion: current.companion });
       earned = saved.gains;
       return saved.progress;
     });
@@ -57,7 +59,7 @@ export function useStoryPlayer(story: Story, options?: { instantCaptions?: boole
   function restart(companion: Companion = progress.companion) {
     if (timer.current) clearTimeout(timer.current);
     locked.current = false; setPendingChoice(null); setGains(emptySkills()); setReveal({ key: '', count: 0 });
-    updateProgress(current => ({ ...current, companion, stories: { ...current.stories, [story.id]: { ...(current.stories[story.id] ?? { choiceAwarded: false, completed: false }), checkpoint: initialStoryState(story) } } }));
+    updateProgress(current => ({ ...current, companion, stories: { ...current.stories, [story.id]: { ...(current.stories[story.id] ?? { choiceAwarded: false, completed: false }), checkpoint: { ...initialStoryState(story), companion } } } }));
   }
   function rewind() {
     const previous = rewindToLastChoice(story, state);

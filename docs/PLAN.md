@@ -90,3 +90,6 @@ Still open:
 
 - **Island voyage homepage** (`5ea16cf`): five islands, the companion sails to the island you tap, lanterns on completed islands, parallax, soft sounds with mute, a phone zigzag layout.
 - **Nagar: The Long Journey** built from the approved script (`docs/NAGAR_STORY.md`): new roadside-stop background, 3 × 3 branches, sourced Science Check (NG-1 to NG-4), HI/OR machine drafts. Nagar is no longer "Coming soon".
+- **The Stain as Aarav**: picking Aarav now opens the story from his view (notice → react), then switches to Aara's view (her decision), then the shared ending. It reuses approved lines plus one new line. Saved progress is tagged by companion, so switching never resumes the other version. Nagar, Bazaar and Sakhi Sabha keep one order for now (planned for the finals).
+- **Say it your way**: a "Tap to speak" concept preview under every choice set (no microphone use); design in `docs/VOICE_ANSWERS.md`.
+- **Eye fix**: character pivots now use drawing coordinates, so eyes no longer drift during blinks or talking.
