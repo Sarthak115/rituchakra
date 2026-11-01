@@ -199,6 +199,20 @@ They live in `data/translations/demoUpgrade.ts`, plus one shortened line in `com
 | And I’ll remember that buying pads is just like buying anything else. | और मैं याद रखूँगा कि पैड खरीदना किसी भी और चीज़ को खरीदने जैसा ही है। | ଆଉ ମୁଁ ମନେ ରଖିବି ଯେ ପ୍ୟାଡ୍ କିଣିବା ଅନ୍ୟ ଯେକୌଣସି ଜିନିଷ କିଣିବା ଭଳି। | Machine draft | |
 | What would you put in a small period kit for a trip, and who could you ask for help on the way? | सफ़र के लिए एक छोटी पीरियड किट में आप क्या रखेंगे, और रास्ते में किससे मदद माँग सकते हैं? | ଯାତ୍ରା ପାଇଁ ଏକ ଛୋଟ ପିରିୟଡ୍ କିଟ୍‌ରେ ଆପଣ କ’ଣ ରଖିବେ, ଆଉ ବାଟରେ କାହାକୁ ସାହାଯ୍ୟ ମାଗିପାରିବେ? | Machine draft | |
 
+### "Say it your way" voice preview
+
+| English | Hindi | Odia | Status | Notes |
+|---|---|---|---|---|
+| Tap to speak | बोलने के लिए टैप करें | କହିବା ପାଇଁ ଟ୍ୟାପ୍ କରନ୍ତୁ | Machine draft | |
+| Say it your way | अपने शब्दों में कहें | ନିଜ ଭାଷାରେ କୁହନ୍ତୁ | Machine draft | |
+| Preview | झलक | ଝଲକ | Machine draft | |
+| Coming soon: answer in your own words | जल्द आ रहा है: अपने शब्दों में जवाब दें | ଶୀଘ୍ର ଆସୁଛି: ନିଜ ଭାଷାରେ ଉତ୍ତର ଦିଅନ୍ତୁ | Machine draft | |
+| Speak in Hindi, Odia or English. | हिंदी, ओड़िया या अंग्रेज़ी में बोलें। | ହିନ୍ଦୀ, ଓଡ଼ିଆ ବା ଇଂରାଜୀରେ କୁହନ୍ତୁ। | Machine draft | |
+| RituChakra matches your answer to a reviewed story path. | RituChakra आपके जवाब को जाँची हुई कहानी की किसी राह से मिलाता है। | RituChakra ଆପଣଙ୍କ ଉତ୍ତରକୁ ଯାଞ୍ଚ ହୋଇଥିବା କାହାଣୀର ଏକ ବାଟ ସହ ମିଳାଏ। | Machine draft | |
+| The story continues from what you said. | कहानी आपकी कही बात से आगे बढ़ती है। | ଆପଣ କହିଥିବା କଥାରୁ କାହାଣୀ ଆଗକୁ ବଢ଼େ। | Machine draft | |
+| This preview does not use the microphone. Nothing is recorded or stored. | यह झलक माइक्रोफ़ोन का इस्तेमाल नहीं करती। कुछ भी रिकॉर्ड या सेव नहीं होता। | ଏହି ଝଲକ ମାଇକ୍ରୋଫୋନ୍ ବ୍ୟବହାର କରେ ନାହିଁ। କିଛି ରେକର୍ଡ ବା ସେଭ୍ ହୁଏ ନାହିଁ। | Machine draft | |
+| Back to the choices | विकल्पों पर वापस | ବିକଳ୍ପକୁ ଫେରନ୍ତୁ | Machine draft | |
+
 ### Choose What Fits – shortened existing line (unsourced second sentence removed)
 
 | English | Hindi | Odia | Status | Notes |

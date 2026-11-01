@@ -144,3 +144,19 @@ html:lang(hi) body{font-family:'Noto Sans Devanagari','Nirmala UI',Arial,sans-se
 .island-intro{padding:16px 16px 12px}.island-intro .world-map-eyebrow{margin-bottom:8px}
 .island-map-wide{aspect-ratio:auto;height:clamp(420px,calc(100vh - 220px),720px);max-height:none;margin-top:0}
 @media(max-width:700px){.island-stage .map-companion-picker{position:static;width:max-content;margin:0 auto 12px;background:none;border:0;box-shadow:none;padding:0}.island-stage .map-companion-picker legend{float:none;width:100%;text-align:center}}
+/* "Say it your way" voice-answer concept preview (no microphone access). */
+.speak-preview{margin-top:4px}
+.speak-button{width:100%;display:flex;align-items:center;gap:14px;text-align:left;border:1.5px dashed #9fb8ad;background:#f4f7ef;border-radius:9px;padding:11px 15px;color:var(--ink);transition:background .2s,border-color .2s}
+.speak-button:hover,.speak-button.is-open{background:#eaf1e4;border-color:var(--teal)}
+.speak-button strong{display:block;font-weight:600;font-size:15px;color:var(--teal)}.speak-button small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.speak-mic{position:relative;flex-shrink:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:#fff9ec}
+.speak-mic i{position:absolute;inset:0;border-radius:50%;border:2px solid var(--teal);animation:mic-ring 2.2s ease-out infinite;opacity:0}.speak-mic i+i{animation-delay:1.1s}
+.speak-tag{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#8a6a3c;background:#f6e8cc;border-radius:20px;padding:4px 9px}
+.speak-card{overflow:hidden}.speak-card-inner{margin-top:8px;padding:16px 18px;border:1px solid #d3dec9;border-radius:11px;background:#fbfdf8}
+.speak-card h3{font:400 19px/1.35 Georgia,serif;margin:10px 0 8px}.speak-card ol{margin:0 0 10px;padding-left:20px;font-size:14px;line-height:1.7;color:var(--ink)}
+.speak-safe{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--teal);margin:0 0 10px}
+.speak-close{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:transparent;border-radius:20px;padding:7px 12px;font-size:13px;color:var(--muted)}
+.speak-wave{display:flex;align-items:center;gap:4px;height:28px}.speak-wave i{width:4px;height:100%;border-radius:4px;background:var(--teal);opacity:.75;transform-origin:center;animation:wave-bar 1.1s ease-in-out infinite}
+@keyframes mic-ring{from{transform:scale(1);opacity:.6}to{transform:scale(1.7);opacity:0}}@keyframes wave-bar{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.classroom-mode .speak-button strong{font-size:18px}
+@media(prefers-reduced-motion:reduce){.speak-mic i,.speak-wave i{animation:none}}

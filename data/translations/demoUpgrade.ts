@@ -118,4 +118,14 @@ export const demoUpgradeCopy: Record<string, [string, string]> = {
   'Thank you, Aarav. Next time I’ll keep a small period kit in my bag.': ['शुक्रिया, Aarav। अगली बार मैं अपने बैग में एक छोटी पीरियड किट रखूँगी।', 'ଧନ୍ୟବାଦ, Aarav। ପରବର୍ତ୍ତୀ ଥର ମୁଁ ମୋ ବ୍ୟାଗରେ ଏକ ଛୋଟ ପିରିୟଡ୍ କିଟ୍ ରଖିବି।'],
   'And I’ll remember that buying pads is just like buying anything else.': ['और मैं याद रखूँगा कि पैड खरीदना किसी भी और चीज़ को खरीदने जैसा ही है।', 'ଆଉ ମୁଁ ମନେ ରଖିବି ଯେ ପ୍ୟାଡ୍ କିଣିବା ଅନ୍ୟ ଯେକୌଣସି ଜିନିଷ କିଣିବା ଭଳି।'],
   'What would you put in a small period kit for a trip, and who could you ask for help on the way?': ['सफ़र के लिए एक छोटी पीरियड किट में आप क्या रखेंगे, और रास्ते में किससे मदद माँग सकते हैं?', 'ଯାତ୍ରା ପାଇଁ ଏକ ଛୋଟ ପିରିୟଡ୍ କିଟ୍‌ରେ ଆପଣ କ’ଣ ରଖିବେ, ଆଉ ବାଟରେ କାହାକୁ ସାହାଯ୍ୟ ମାଗିପାରିବେ?'],
+  // "Say it your way" voice preview
+  'Tap to speak': ['बोलने के लिए टैप करें', 'କହିବା ପାଇଁ ଟ୍ୟାପ୍ କରନ୍ତୁ'],
+  'Say it your way': ['अपने शब्दों में कहें', 'ନିଜ ଭାଷାରେ କୁହନ୍ତୁ'],
+  'Preview': ['झलक', 'ଝଲକ'],
+  'Coming soon: answer in your own words': ['जल्द आ रहा है: अपने शब्दों में जवाब दें', 'ଶୀଘ୍ର ଆସୁଛି: ନିଜ ଭାଷାରେ ଉତ୍ତର ଦିଅନ୍ତୁ'],
+  'Speak in Hindi, Odia or English.': ['हिंदी, ओड़िया या अंग्रेज़ी में बोलें।', 'ହିନ୍ଦୀ, ଓଡ଼ିଆ ବା ଇଂରାଜୀରେ କୁହନ୍ତୁ।'],
+  'RituChakra matches your answer to a reviewed story path.': ['RituChakra आपके जवाब को जाँची हुई कहानी की किसी राह से मिलाता है।', 'RituChakra ଆପଣଙ୍କ ଉତ୍ତରକୁ ଯାଞ୍ଚ ହୋଇଥିବା କାହାଣୀର ଏକ ବାଟ ସହ ମିଳାଏ।'],
+  'The story continues from what you said.': ['कहानी आपकी कही बात से आगे बढ़ती है।', 'ଆପଣ କହିଥିବା କଥାରୁ କାହାଣୀ ଆଗକୁ ବଢ଼େ।'],
+  'This preview does not use the microphone. Nothing is recorded or stored.': ['यह झलक माइक्रोफ़ोन का इस्तेमाल नहीं करती। कुछ भी रिकॉर्ड या सेव नहीं होता।', 'ଏହି ଝଲକ ମାଇକ୍ରୋଫୋନ୍ ବ୍ୟବହାର କରେ ନାହିଁ। କିଛି ରେକର୍ଡ ବା ସେଭ୍ ହୁଏ ନାହିଁ।'],
+  'Back to the choices': ['विकल्पों पर वापस', 'ବିକଳ୍ପକୁ ଫେରନ୍ତୁ'],
 };

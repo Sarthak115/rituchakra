@@ -21,6 +21,7 @@ import { StoryProgress } from './StoryProgress';
 import { SceneTransition } from './SceneTransition';
 import { SceneIntro } from './SceneIntro';
 import { ConsequenceCard } from './ConsequenceCard';
+import { SpeakPreview } from './SpeakPreview';
 import { useStoryPlayer } from '@/lib/story/useStoryPlayer';
 import { updateProgress, useProgress } from '@/lib/story/useProgress';
 import { storyForCompanion } from '@/lib/story/engine';
@@ -102,7 +103,7 @@ function StoryStage({ storyData }: { storyData: Story }) {
               if (!classroom) return button;
               const count = votes[choice.id] ?? 0;
               return <div key={choice.id} className={`vote-row ${count > 0 && count === topVote ? 'vote-leader' : ''}`}>{button}<div className="vote-tally"><button onClick={() => vote(choice.id, -1)} disabled={!count} aria-label={`${t('Remove a vote')}: ${choice.text}`}><Minus size={18}/></button><output aria-live="polite" aria-label={`${count} ${t('votes')}`}>{count}</output><button onClick={() => vote(choice.id, 1)} aria-label={`${t('Add a vote')}: ${choice.text}`}><Plus size={18}/></button></div></div>;
-            })}</div></section>}
+            })}<SpeakPreview/></div></section>}
             {mode === 'narrative' && <section className="story-narrative"><span className="eyebrow">{t('A MOMENT TO REFLECT')}</span><h2>{scene.narrative}</h2><button className="continue-button" onClick={advance}>{t(story.scenes[scene.nextScene ?? '']?.kind === 'science' ? 'Let’s check together' : 'Continue')}<ArrowRight size={17}/></button></section>}
             {mode === 'perspective' && <PerspectiveSwitch onContinue={advance}/>}
             {mode === 'science' && scene.scienceCheck && <ScienceCheck content={scene.scienceCheck} experienced={school} onContinue={advance}/>}
