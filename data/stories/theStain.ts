@@ -1,17 +1,17 @@
 import type { Story, Dialogue, Choice, Companion, Scene } from '@/lib/story/types';
 const line = (id: string, speaker: Companion, text: string, expression: Dialogue['expression'] = 'thinking', listener: Dialogue['expression'] = 'concerned'): Dialogue => ({ id, speaker, text, translation: '', expression, listener });
-const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact']): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence: '', companionExpression: 'thinking' });
+const choice = (id: string, text: string, nextScene: string, skillImpact: Choice['skillImpact'], consequence = ''): Choice => ({ id, text, nextScene, skillImpact, translation: '', consequence, companionExpression: 'thinking' });
 const scene = (id: string, view: Companion, progress: number, dialogue: Dialogue[], nextScene?: string): Scene => ({ id, view, progress, dialogue, nextScene });
 export const theStain: Story = {
-  id: 'vidyalaya-the-stain', title: 'The Stain', world: 'Vidyalaya', setting: 'school', startScene: 'opening', completionImpact: { gyaan: 2, badlav: 2 },
+  id: 'vidyalaya-the-stain', title: 'The Stain', world: 'Vidyalaya', setting: 'school', startScene: 'opening', reflection: 'If you saw a classmate with a stain, what is one quiet, kind thing you could do?', completionImpact: { gyaan: 2, badlav: 2 },
   scenes: {
     opening: { ...scene('opening', 'aara', 0, [
       line('stain-noticed', 'aara', 'Oh no… I think I have a stain.', 'concerned'),
       line('stain-worry', 'aara', 'What if someone notices? I feel embarrassed. I need a moment.', 'confused'),
     ]), choices: [
-      choice('ask-friend', 'Ask a trusted friend for help.', 'friend-help', { samvaad: 4, saath: 3, badlav: 3 }),
-      choice('leave-quietly', 'Try to hide it and leave quietly.', 'quiet-exit', { samvaad: 1, saath: 1, badlav: 2 }),
-      choice('ask-teacher', 'Ask a teacher for help.', 'teacher-help', { samvaad: 4, saath: 2, badlav: 4 }),
+      choice('ask-friend', 'Ask a trusted friend for help.', 'friend-help', { samvaad: 4, saath: 3, badlav: 3 }, 'Asking someone you trust means you do not have to handle it alone.'),
+      choice('leave-quietly', 'Try to hide it and leave quietly.', 'quiet-exit', { samvaad: 1, saath: 1, badlav: 2 }, 'Wanting privacy is understandable. Asking for help can still make things easier.'),
+      choice('ask-teacher', 'Ask a teacher for help.', 'teacher-help', { samvaad: 4, saath: 2, badlav: 4 }, 'Teachers can help with supplies and a private place to change.'),
     ] },
     'friend-help': scene('friend-help', 'aara', 1, [
       line('ask-friend-line', 'aara', 'Aarav, could you help me find a teacher? Please keep this between us.', 'concerned', 'thinking'),
@@ -32,9 +32,9 @@ export const theStain: Story = {
       line('aarav-notices', 'aarav', 'Aara looks worried. I noticed the stain, but I do not know what she needs.', 'thinking', 'concerned'),
       line('aarav-choice', 'aarav', 'What I do next could make this moment easier—or harder—for her.', 'thinking', 'concerned'),
     ]), choices: [
-      choice('make-joke', 'Make a joke.', 'joke', { samvaad: 0, saath: 0, badlav: 0 }),
-      choice('ignore', 'Ignore what happened.', 'ignore-reaction', { samvaad: 1, saath: 1, badlav: 0 }),
-      choice('offer-help', 'Quietly offer help.', 'help', { samvaad: 5, saath: 6, badlav: 5 }),
+      choice('make-joke', 'Make a joke.', 'joke', { samvaad: 0, saath: 0, badlav: 0 }, 'Even a light joke can make an embarrassing moment feel worse.'),
+      choice('ignore', 'Ignore what happened.', 'ignore-reaction', { samvaad: 1, saath: 1, badlav: 0 }, 'Giving privacy is respectful, but quietly checking in can help more.'),
+      choice('offer-help', 'Quietly offer help.', 'help', { samvaad: 5, saath: 6, badlav: 5 }, 'Offering help quietly lets your friend decide what she needs.'),
     ] },
     joke: scene('joke', 'aarav', 3, [
       line('joke-hurts', 'aara', 'Please do not joke about it. I am already feeling embarrassed.', 'concerned', 'concerned'),
@@ -53,10 +53,15 @@ export const theStain: Story = {
     ], 'reflection'),
     reflection: { ...scene('reflection', 'aarav', 3, [], 'science'), kind: 'narrative', narrative: 'Sometimes the same moment feels completely different depending on where you stand. Being an ally means helping without making someone feel embarrassed.' },
     science: { ...scene('science', 'aarav', 4, [], 'resolution'), kind: 'science', scienceCheck: {
-      belief: 'Period stains can happen unexpectedly.',
-      evidence: 'Menstruation is a normal biological process. A period may start unexpectedly or leak onto clothing, and a person may need practical support.',
+      // Wording mirrors UNFPA, UNICEF and WHO; see docs/health-evidence-register.md (claims ST-1 to ST-3).
+      belief: 'If I get a stain at school, I have to hide it and manage alone.',
+      evidence: 'Periods can vary, especially in the first few years, and can start suddenly. Carrying a pad in your school bag helps you, or a friend who needs one. Shame and fear of teasing can keep girls away from school, so quiet, kind help matters.',
       takeaway: 'Help with dignity. Never turn someone’s period into a joke.',
-      sources: [{ title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' }],
+      sources: [
+        { title: 'UNFPA: Menstruation and human rights – FAQ', url: 'https://www.unfpa.org/menstruationfaq' },
+        { title: 'UNICEF: Talking about periods at home', url: 'https://www.unicef.org/parenting/health/talking-about-periods-at-home' },
+        { title: 'WHO: Menstrual health fact sheet', url: 'https://www.who.int/news-room/fact-sheets/detail/menstrual-health' },
+      ],
     } },
     resolution: scene('resolution', 'aarav', 4, [
       line('stain-ending-aara', 'aara', 'I have what I need now. Thank you for giving me privacy and support.', 'relieved', 'relieved'),
@@ -65,3 +70,22 @@ export const theStain: Story = {
     complete: { ...scene('complete', 'aarav', 5, []), kind: 'end' },
   },
 };
+
+// Playing as Aarav: the same moment, seen from his side first. He notices and chooses how to react;
+// then "See their side" moves to Aara, who decides what she needs. Lines are reused from the
+// approved Aara-first version wherever they fit, so wording and translations stay reviewed.
+const base = theStain.scenes;
+const reuse = (sceneId: string, ...ids: string[]) => ids.map(id => base[sceneId].dialogue.find(item => item.id === id)!);
+const again = (sceneId: string, id: string, nextScene: string) => ({ ...base[sceneId].choices!.find(item => item.id === id)!, id: `v-${id}`, nextScene });
+theStain.companionStart = { aarav: 'v-opening' };
+theStain.companionScenes = { aarav: {
+  'v-opening': { view: 'aarav', progress: 0, dialogue: reuse('aarav-opening', 'aarav-notices', 'aarav-choice'), choices: [again('aarav-opening', 'make-joke', 'v-joke'), again('aarav-opening', 'ignore', 'v-ignore'), again('aarav-opening', 'offer-help', 'v-help')] },
+  'v-joke': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: reuse('joke', 'joke-hurts', 'joke-repair') },
+  'v-ignore': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: reuse('ignore-reaction', 'ignored', 'ignore-reconsider', 'ignore-offer') },
+  'v-help': { view: 'aarav', progress: 1, nextScene: 'v-switch', dialogue: [...reuse('help', 'help-offer'), line('help-moment', 'aara', 'Thank you for asking quietly. Give me a moment to think.', 'reassuring', 'reassuring')] },
+  'v-switch': { view: 'aarav', progress: 2, kind: 'perspective', nextScene: 'v-aara' },
+  'v-aara': { view: 'aara', progress: 2, dialogue: reuse('opening', 'stain-noticed', 'stain-worry'), choices: [again('opening', 'ask-friend', 'v-friend'), again('opening', 'leave-quietly', 'v-quiet'), again('opening', 'ask-teacher', 'v-teacher')] },
+  'v-friend': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['friend-help'].dialogue },
+  'v-quiet': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['quiet-exit'].dialogue },
+  'v-teacher': { view: 'aara', progress: 3, nextScene: 'reflection', dialogue: base['teacher-help'].dialogue },
+} };

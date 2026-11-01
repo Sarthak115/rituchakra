@@ -1,14 +1,21 @@
 export type CharacterId = 'aara' | 'aarav' | 'dadi';
 export type Companion = Exclude<CharacterId, 'dadi'>;
-export type Expression = 'idle' | 'happy' | 'thinking' | 'confused' | 'surprised' | 'concerned' | 'relieved';
+export type FaceExpression = 'neutral' | 'curious' | 'worried' | 'embarrassed' | 'thinking' | 'happy' | 'surprised' | 'reassuring';
+// Older story data uses idle/confused/concerned/relieved; the character rig maps them onto the faces above.
+export type Expression = FaceExpression | 'idle' | 'confused' | 'concerned' | 'relieved';
 export type Animation = 'idle' | 'talking' | 'enter' | 'exit' | 'bounce' | 'react' | 'think' | 'celebrate';
 export type Skill = 'gyaan' | 'samvaad' | 'saath' | 'badlav';
 export interface Dialogue { id: string; speaker: CharacterId | 'companion'; text: string; translation: string; expression: Expression; listener: Expression; }
 export interface Choice { id: string; text: string; translation: string; nextScene: string; skillImpact: Partial<Record<Skill, number>>; consequence: string; companionExpression: Expression; }
 export type SkillValues = Record<Skill, number>;
 export type StoryMode = 'dialogue' | 'choices' | 'narrative' | 'science' | 'perspective' | 'end';
-export interface ScienceCheckContent { belief: string; evidence: string; takeaway: string; sources: { title: string; url: string }[]; }
-export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; choicePrompt?: string; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; }
-export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school' | 'bazaar' | 'community'; chapter?: string; subtitle?: string; context?: string; footerLabel?: string; stages?: string[]; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>; }
-export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; }
+// `cultureNote` keeps family, cultural or religious practice visibly separate from the medical fact.
+export interface ScienceCheckContent { belief: string; evidence: string; takeaway: string; cultureNote?: string; sources: { title: string; url: string }[]; }
+export interface Scene { id: string; dialogue: Dialogue[]; choices?: Choice[]; choicePrompt?: string; kind?: Exclude<StoryMode, 'choices'>; nextScene?: string; narrative?: string; scienceCheck?: ScienceCheckContent; progress?: number; view?: Companion; guest?: CharacterId; }
+export interface Story { id: string; title: string; world: string; startScene?: string; setting?: 'home' | 'school' | 'bazaar' | 'community' | 'city'; chapter?: string; subtitle?: string; context?: string; footerLabel?: string; stages?: string[]; reflection?: string; completionImpact?: Partial<SkillValues>; scenes: Record<string, Scene>;
+  /** Scene overrides when the learner plays as a given companion (e.g. Aarav as Aara's brother in Ghar). */
+  companionScenes?: Partial<Record<Companion, Record<string, Partial<Scene>>>>;
+  companionStart?: Partial<Record<Companion, string>>; }
+// `companion` tags a saved checkpoint, so switching companion never resumes the other version's path.
+export interface StoryState { sceneId: string; index: number; mode: StoryMode; choiceId: string | null; choiceIds?: string[]; companion?: Companion; }
 

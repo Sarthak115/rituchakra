@@ -1,5 +1,15 @@
-import type { Choice, Story, StoryState } from './types';
+import type { Choice, Companion, Story, StoryState } from './types';
 
+// The version of a story the chosen companion plays: overrides patch existing scenes, new ids add
+// scenes, and `companionStart` can open the story from a different scene (e.g. Aarav's view first).
+export function storyForCompanion(story: Story, companion: Companion): Story {
+  const overrides = story.companionScenes?.[companion];
+  const start = story.companionStart?.[companion];
+  if (!overrides && !start) return story;
+  const scenes = Object.fromEntries(Object.entries(story.scenes).map(([id, scene]) => [id, overrides?.[id] ? { ...scene, ...overrides[id] } : scene]));
+  for (const [id, scene] of Object.entries(overrides ?? {})) if (!story.scenes[id]) scenes[id] = { id, dialogue: [], ...scene };
+  return { ...story, startScene: start ?? story.startScene, scenes };
+}
 export function enterScene(story: Story, sceneId: string, choiceId: string | null = null, choiceIds: string[] = []): StoryState {
   const scene = story.scenes[sceneId];
   if (!scene) throw new Error(`Unknown story scene: ${sceneId}`);
@@ -21,6 +31,15 @@ export function selectChoice(story: Story, state: StoryState, id: string): Story
   const choice = story.scenes[state.sceneId].choices?.find(item => item.id === id);
   if (state.mode !== 'choices' || !choice) throw new Error('This choice is not available.');
   return enterScene(story, choice.nextScene, choice.id, [...(state.choiceIds ?? (state.choiceId ? [state.choiceId] : [])), choice.id]);
+}
+// "Try another choice": return to the most recent decision with that choice undone.
+export function rewindToLastChoice(story: Story, state: StoryState): StoryState | null {
+  const choiceIds = state.choiceIds ?? (state.choiceId ? [state.choiceId] : []);
+  const last = choiceIds.at(-1);
+  const scene = Object.values(story.scenes).find(item => item.choices?.some(choice => choice.id === last));
+  if (!last || !scene) return null;
+  const previous = choiceIds.slice(0, -1);
+  return { sceneId: scene.id, index: Math.max(scene.dialogue.length - 1, 0), mode: 'choices', choiceId: previous.at(-1) ?? null, choiceIds: previous };
 }
 export function restoreStoryState(story: Story, value: unknown): StoryState {
   const fallback = initialStoryState(story);

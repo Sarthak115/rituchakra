@@ -1,37 +1,134 @@
 'use client';
+import { useEffect, useId, useState } from 'react';
+import * as m from 'motion/react-m';
+import { useReducedMotion, type Transition } from 'motion/react';
 import { useLanguage } from '@/lib/useLanguage';
-import { useEffect, useState } from 'react';
 import type { Animation, CharacterId, Expression } from '@/lib/story/types';
-import { CharacterExpression } from './CharacterExpression';
-export interface CharacterProps { character: CharacterId; expression?: Expression; animation?: Animation; className?: string; }
-export function Character({ character, expression = 'idle', animation = 'idle', className = '' }: CharacterProps) {
+import { Accessories, BodyArt, FaceBase, FaceDetails, HairBack, HairFront } from './CharacterArt';
+import { armPaths, browPaths, facePoses, gesturePoses, looks, mirrorArm, mouthPath, teethPath, toFace, type ArmPose, type Look, type Pt } from './poses';
+
+export interface CharacterProps {
+  character: CharacterId; expression?: Expression; animation?: Animation; className?: string;
+  /** 1 = looking toward the right of the stage, -1 = toward the left. */
+  facing?: 1 | -1;
+  /** True while someone else is speaking: the character leans in, looks at them and nods on each new line. */
+  listening?: boolean;
+  /** Changes on every new line so listeners can react. */
+  reactKey?: string;
+}
+
+const names: Record<CharacterId, string> = { aara: 'Aara', aarav: 'Aarav', dadi: 'Dadi' };
+// Pivot points are in the character's 250×410 drawing coordinates. Motion defaults SVG parts to
+// transform-box: fill-box, which would measure them from each part's own corner instead: blinks
+// then collapse the eyes toward a point near the chin, and the head swings from the wrong spot.
+const origin = (x: number, y: number) => ({ originX: `${x}px`, originY: `${y}px`, transformBox: 'view-box' as const });
+const loop = (duration: number): Transition => ({ duration, repeat: Infinity, ease: 'easeInOut' });
+
+export function Character({ character, expression = 'neutral', animation = 'idle', className = '', facing = 1, listening = false, reactKey = '' }: CharacterProps) {
   const { t } = useLanguage();
-  const [blinking, setBlinking] = useState(false);
+  const reduce = useReducedMotion() ?? false;
+  const look = looks[character];
+  const face = toFace(expression);
+  const pose = facePoses[face];
+  const speaking = animation === 'talking';
+  const hop = animation === 'react' || animation === 'bounce' || animation === 'celebrate';
+  const morph: Transition = reduce ? { duration: 0 } : { duration: 0.32, ease: 'easeInOut' };
+  const spring: Transition = reduce ? { duration: 0 } : { type: 'spring', stiffness: 110, damping: 14 };
+
+  // A listener gives a small nod each time the speaker starts a new line.
+  const [nod, setNod] = useState({ key: reactKey, count: 0 });
+  if (nod.key !== reactKey) setNod({ key: reactKey, count: nod.count + 1 });
+  const nodding = listening && !reduce && nod.count > 0;
+
+  const [browL, browR] = browPaths(pose);
+  const closedMouth = mouthPath(pose.mouth);
+  const talkingMouth = [closedMouth, mouthPath(pose.mouth, 7), mouthPath(pose.mouth, 2.5), mouthPath(pose.mouth, 8.5), mouthPath(pose.mouth, 1.5), closedMouth];
+  const look2 = listening ? facing * 1.6 : 0;
+  const [px, py] = pose.pupils;
+
+  // Gestures step between two poses on a slow beat. Plain target changes (not an infinite
+  // keyframe loop) so the arm always settles back when the line ends, even after fast clicks.
+  const [beat, setBeat] = useState(0);
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>; let closed = false;
-    const tick = () => { closed = !closed; setBlinking(closed); timer = setTimeout(tick, closed ? 140 : 2700 + Math.random() * 3400); };
-    timer = setTimeout(tick, 1800 + Math.random() * 2700);
-    return () => clearTimeout(timer);
-  }, []);
-  const dadi = character === 'dadi', aara = character === 'aara';
-  const skin = dadi ? '#c68d66' : aara ? '#dba075' : '#cb9068';
-  return <svg viewBox="0 0 250 410" role="img" aria-label={`${character}, ${t(expression)}${animation === 'talking' ? `, ${t('speaking')}` : ''}`} className={`character character-${character} anim-${animation} mood-${expression} ${className}`}>
-    <ellipse cx="126" cy="395" rx="65" ry="9" fill="#694e3b" opacity=".13"/>
-    <g className="character-body">
-      {!dadi && <g><path d="M92 285 L90 370 Q100 380 113 371 L124 302 L135 371 Q147 380 158 371 L155 283" fill={aara ? '#ead7b1' : '#485d68'}/><path d="M89 366 L86 389 Q101 397 118 389 L114 368 M136 368 L133 389 Q152 397 168 389 L158 368" fill={aara ? '#a24e39' : '#e9c595'} stroke="#574037" strokeWidth="2"/></g>}
-      {dadi ? <><path d="M85 163 Q60 193 67 259 L59 375 Q126 405 183 374 L176 252 Q181 194 159 164Z" fill="#a64c4e" stroke="#743e42" strokeWidth="2"/><path d="M151 163 Q146 220 72 287 L60 372 L86 382 Q130 277 176 215 L169 173Z" fill="#efd2a0"/><path d="M157 169 Q149 228 79 292 L68 374" fill="none" stroke="#d89a53" strokeWidth="7"/><path d="M103 274 L94 376 M126 270 L124 383 M148 265 L156 378" stroke="#863f46" strokeWidth="2" fill="none"/><path d="M77 382 L72 394 L107 395 L109 384 M143 384 L144 396 L176 392 L168 380" fill="#65413b"/></> : <><path d="M94 163 Q77 165 65 192 L80 213 L86 292 Q125 308 165 291 L169 213 L185 194 Q174 169 151 163Z" fill={aara ? '#478a78' : '#d79445'} stroke={aara ? '#316456' : '#ac6b35'} strokeWidth="2"/><path d="M107 166 Q125 184 143 166" stroke={aara ? '#e3d5a3' : '#f5d9a3'} strokeWidth="5" fill="none"/>{aara ? <g stroke="#dfcf93" strokeWidth="2"><path d="M120 190 L125 183 L130 190 L125 197Z M120 225 L125 218 L130 225 L125 232Z M98 251 L103 244 L108 251 L103 258Z M140 251 L145 244 L150 251 L145 258Z" fill="none"/><path d="M89 283 Q126 293 162 283"/></g> : <><path d="M89 210 L162 210 M87 221 L163 221" stroke="#edbe75" strokeWidth="4"/><path d="M142 231 L158 231 L157 248 L150 252 L143 248Z" fill="#be793a"/><circle cx="126" cy="189" r="2" fill="#725331"/></>}</>}
-      <g className="arm arm-left"><path d={dadi ? 'M80 179 Q65 181 61 202 L50 247 Q48 260 59 266 Q71 268 77 253 L94 202' : 'M73 195 L62 249 Q60 262 69 266 Q79 270 83 257 L91 210'} fill={skin} stroke="#a16a4e" strokeWidth="2"/>{dadi && <path d="M77 174 Q60 180 56 205 L84 218 L96 187" fill="#a64c4e"/>}<path d="M62 248 L77 253" stroke="#d9ad53" strokeWidth="5" strokeLinecap="round"/></g>
-      <g className="arm arm-right"><path d={dadi ? 'M164 188 Q181 187 185 207 L192 251 Q194 265 183 268 Q172 269 169 253 L154 209' : 'M173 196 L190 246 Q195 260 185 265 Q175 269 169 253 L158 211'} fill={skin} stroke="#a16a4e" strokeWidth="2"/>{dadi && <path d="M164 175 Q185 183 188 207 L162 218 L151 191" fill="#a64c4e"/>}<path d="M173 251 L189 247" stroke="#d9ad53" strokeWidth="4" strokeLinecap="round"/></g>
-      <path d="M111 145 L108 169 Q125 182 143 168 L138 145" fill={skin}/>
-      <g className="head">
-        {dadi ? <><ellipse cx="171" cy="71" rx="24" ry="26" fill="#686060"/><path d="M76 114 Q62 45 112 39 Q165 26 178 77 L172 124" fill="#7c7470"/></> : aara ? <><path d="M76 114 Q62 47 111 38 Q172 25 181 81 L175 161 L153 174 L84 163Z" fill="#352e2d"/><path d="M77 99 Q49 134 69 196 Q82 209 91 197 L85 113 M170 96 Q195 125 181 187 Q173 204 160 197 L161 118" fill="#352e2d"/><path d="M69 157 L86 159 M164 157 L182 154" stroke="#d88c57" strokeWidth="7"/></> : <path d="M74 117 Q65 85 74 64 L67 62 L84 52 L79 42 Q101 46 109 35 Q166 30 177 63 L178 114Z" fill="#352e2d"/>}
-        <ellipse cx="78" cy="112" rx="9" ry="15" fill={skin}/><ellipse cx="171" cy="112" rx="9" ry="15" fill={skin}/>
-        <path d="M79 82 Q85 56 124 57 Q165 57 171 84 L168 125 Q160 158 125 164 Q90 158 81 129Z" fill={skin} stroke="#a36e52" strokeWidth="1.5"/>
-        {dadi ? <><path d="M77 89 Q100 84 125 56 Q148 86 174 89 L170 62 Q127 27 85 58Z" fill="#827976"/><path d="M84 75 Q108 66 121 50 M137 50 Q151 68 167 75" stroke="#c2b4a5" strokeWidth="3" fill="none"/><circle cx="125" cy="89" r="3.5" fill="#923c37"/></> : aara ? <><path d="M77 91 Q79 48 124 48 Q169 48 175 85 Q147 85 137 62 Q116 88 77 91" fill="#352e2d"/><path d="M87 74 Q107 69 118 57" stroke="#584139" strokeWidth="4" fill="none"/><path d="M160 74 L171 79" stroke="#e5ba57" strokeWidth="5" strokeLinecap="round"/></> : <><path d="M76 90 L77 65 Q92 45 114 49 Q146 35 170 65 L175 92 L160 77 L157 65 Q128 83 95 74 L83 98Z" fill="#352e2d"/><path d="M89 65 Q124 66 145 49" stroke="#574039" strokeWidth="4" fill="none"/></>}
-        <CharacterExpression expression={expression} blinking={blinking}/>
-        {dadi && <g fill="none" stroke="#66534c" strokeWidth="2"><rect x="89" y="97" width="29" height="22" rx="9"/><rect x="132" y="97" width="29" height="22" rx="9"/><path d="M118 105 Q125 100 132 105 M89 103 L79 99 M161 103 L171 99 M92 133 L102 135 M148 135 L157 131"/><path d="M103 82 L115 81 M133 81 L145 83" opacity=".5"/></g>}
-        {(aara || dadi) && <g fill="#e9ba54" stroke="#aa7e35" strokeWidth="1.5"><circle cx="78" cy="127" r={dadi ? 5 : 3}/><circle cx="171" cy="127" r={dadi ? 5 : 3}/></g>}
-      </g>
-    </g>
+    if (!speaking || reduce) return;
+    const timer = setInterval(() => setBeat(value => value + 1), 1300);
+    return () => clearInterval(timer);
+  }, [speaking, reduce]);
+  const gestureArm = facing === 1 ? 'right' : 'left';
+  const armFor = (side: 'left' | 'right'): ArmPose => {
+    if (speaking && pose.gestures && !reduce && side === gestureArm) { const gesture = gesturePoses[beat % 2]; return side === 'right' ? gesture : mirrorArm(gesture); }
+    return side === 'right' ? pose.armR : pose.armL ?? mirrorArm(pose.armR);
+  };
+
+  return <svg viewBox="0 0 250 410" role="img" aria-label={`${names[character]}, ${t(face)}${speaking ? `, ${t('speaking')}` : ''}`} className={`character character-${character} ${className}`}>
+    <m.ellipse cx="126" cy="395" ry="9" fill="#694e3b" initial={false} animate={{ rx: speaking ? 72 : 65, opacity: speaking ? 0.2 : 0.13 }} transition={morph}/>
+    <m.g style={origin(125, 395)} initial={false} animate={{ rotate: listening ? facing * 1.4 : 0 }} transition={spring}>
+      <m.g style={origin(125, 395)} animate={reduce ? { rotate: 0 } : { rotate: [-0.5, 0.5, -0.5] }} transition={loop(7.5)}>
+        <m.g initial={false} animate={hop && !reduce ? { y: [0, -7, 0, -2, 0] } : { y: 0 }} transition={{ duration: 0.6 }}>
+          <m.g style={origin(125, 390)} animate={reduce ? { scaleY: 1 } : { scaleY: [1, 1.012, 1] }} transition={loop(3.8)}>
+            <BodyArt character={character}/>
+            <Arm look={look} shoulder={look.shoulders[0]} pose={armFor('left')} morph={morph}/>
+            <Arm look={look} shoulder={look.shoulders[1]} pose={armFor('right')} morph={morph}/>
+            <m.g style={origin(125, 165)} initial={false} animate={{ rotate: pose.tilt * facing, y: pose.drop }} transition={spring}>
+              <m.g style={origin(125, 165)} animate={reduce ? { rotate: 0 } : { rotate: [0, 1.1, 0, -0.9, 0] }} transition={loop(9)}>
+                <m.g style={origin(125, 165)} initial={false} animate={speaking && !reduce ? { rotate: beat % 2 ? -1.8 : 1.3, y: beat % 2 ? -1.2 : 0.4 } : { rotate: 0, y: 0 }} transition={{ duration: 0.65, ease: 'easeInOut' }}>
+                <m.g initial={false} animate={{ y: nodding ? (nod.count % 2 ? [0, 3, 0, 1.5, 0] : [0, 3.01, 0, 1.5, 0]) : 0 }} transition={{ duration: 0.9 }}>
+                  <HairBack character={character}/>
+                  <FaceBase character={character}/>
+                  <HairFront character={character}/>
+                  <m.g fill="#d8806a" initial={false} animate={{ opacity: pose.blush }} transition={morph}><ellipse cx="92" cy="124" rx="11" ry="5"/><ellipse cx="157" cy="124" rx="11" ry="5"/></m.g>
+                  <Eye cx={104} look={look} pose={{ px: px + look2, py, lid: pose.lid, scale: pose.eyeScale }} reduce={reduce} morph={morph}/>
+                  <Eye cx={145} look={look} pose={{ px: px + look2, py, lid: pose.lid, scale: pose.eyeScale }} reduce={reduce} morph={morph}/>
+                  <g fill="none" stroke={look.brow} strokeWidth={character === 'aarav' ? 4.2 : 3.6} strokeLinecap="round">
+                    <m.path initial={false} animate={{ d: browL }} transition={morph}/>
+                    <m.path initial={false} animate={{ d: browR }} transition={morph}/>
+                  </g>
+                  <FaceDetails character={character}/>
+                  <m.path key={speaking && !reduce ? 'talk' : 'rest'} fill="#7b403d" stroke="#6e3a37" strokeWidth="2.4" strokeLinejoin="round" initial={false} animate={{ d: speaking && !reduce ? talkingMouth : closedMouth }} transition={speaking && !reduce ? { duration: 0.62, repeat: Infinity, ease: 'easeInOut' } : morph}/>
+                  <m.path d={teethPath(pose.mouth)} fill="none" stroke="#fff6ea" strokeWidth="3.2" strokeLinecap="round" initial={false} animate={{ opacity: speaking ? 0 : pose.teeth, d: teethPath(pose.mouth) }} transition={morph}/>
+                  <Accessories character={character}/>
+                </m.g>
+                </m.g>
+              </m.g>
+            </m.g>
+          </m.g>
+        </m.g>
+      </m.g>
+    </m.g>
   </svg>;
+}
+
+function Eye({ cx, look, pose, reduce, morph }: { cx: number; look: Look; pose: { px: number; py: number; lid: number; scale: number }; reduce: boolean; morph: Transition }) {
+  const clip = useId();
+  const cy = 105, { rx, ry, pupilRx, pupilRy } = look.eye;
+  const { period, double } = look.blink;
+  const blink = double ? { scaleY: [1, 1, 0.1, 1, 0.1, 1], times: [0, 0.9, 0.925, 0.95, 0.975, 1] } : { scaleY: [1, 1, 0.1, 1], times: [0, 0.94, 0.97, 1] };
+  // Eyes drift toward a point now and then, like someone listening and thinking.
+  const glance = [pose.px, pose.px, pose.px + 1.6, pose.px + 1.6, pose.px, pose.px];
+  return <m.g style={origin(cx, cy)} initial={false} animate={{ scaleY: pose.scale }} transition={morph}>
+    <m.g style={origin(cx, cy)} animate={reduce ? { scaleY: 1 } : { scaleY: blink.scaleY }} transition={reduce ? { duration: 0 } : { duration: period, times: blink.times, repeat: Infinity, ease: 'linear', delay: cx === 104 ? 0 : 0.02 }}>
+      <clipPath id={clip}><ellipse cx={cx} cy={cy} rx={rx} ry={ry}/></clipPath>
+      <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill="#fff8e8" stroke="#5a403a" strokeWidth="1"/>
+      <g clipPath={`url(#${clip})`}>
+        <m.g initial={false} animate={{ x: reduce ? pose.px : glance, y: pose.py }} transition={reduce ? { duration: 0 } : { x: { duration: 7, times: [0, 0.55, 0.6, 0.82, 0.87, 1], repeat: Infinity }, y: morph }}>
+          <ellipse cx={cx + 1} cy={cy + 1} rx={pupilRx} ry={pupilRy} fill="#302728"/>
+          <circle cx={cx + 2.5} cy={cy - 2} r="1.9" fill="#fff"/>
+        </m.g>
+        <m.rect x={cx - rx - 1} y={cy - ry - 1} width={rx * 2 + 2} height={ry * 2 + 2} fill={look.skin} style={origin(cx, cy - ry - 1)} initial={false} animate={{ scaleY: pose.lid }} transition={morph}/>
+      </g>
+    </m.g>
+  </m.g>;
+}
+
+function Arm({ look, shoulder, pose, morph }: { look: Look; shoulder: Pt; pose: ArmPose; morph: Transition }) {
+  const { limb, sleeve, hand, bangle } = armPaths(shoulder, pose);
+  const transition: Transition = morph.duration === 0 ? morph : { duration: 0.7, ease: 'easeInOut' };
+  return <g strokeLinecap="round" strokeLinejoin="round" fill="none">
+    <m.path stroke={look.skinLine} strokeWidth="16.5" initial={false} animate={{ d: limb }} transition={transition}/>
+    <m.path stroke={look.skin} strokeWidth="13.5" initial={false} animate={{ d: limb }} transition={transition}/>
+    <m.path stroke={look.clothLine} strokeWidth="19" initial={false} animate={{ d: sleeve }} transition={transition}/>
+    <m.path stroke={look.cloth} strokeWidth="16" initial={false} animate={{ d: sleeve }} transition={transition}/>
+    {look.bangles && <m.circle r="7.2" stroke="#d9ad53" strokeWidth="2.6" initial={false} animate={{ cx: bangle[0], cy: bangle[1] }} transition={transition}/>}
+    <m.circle r="7.6" fill={look.skin} stroke={look.skinLine} strokeWidth="1.5" initial={false} animate={{ cx: hand[0], cy: hand[1] }} transition={transition}/>
+  </g>;
 }
